@@ -1,6 +1,7 @@
 node_modules
 
-#.env.local
+.env.local
+.env.*.local
 
 # npm lock file - bun.lock is the canonical lock file
 package-lock.json
