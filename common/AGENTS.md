@@ -1,0 +1,1 @@
+- This folder is a resource shared by both the client and server, and should not have any dependencies on either of them. If you need to share code between the client and server, put it in this folder.

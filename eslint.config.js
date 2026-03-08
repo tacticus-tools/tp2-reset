@@ -1,0 +1,46 @@
+// @ts-check
+import { defineConfig, globalIgnores } from "eslint/config";
+import tailwindPlugin from "eslint-plugin-better-tailwindcss";
+import convexPlugin from "@convex-dev/eslint-plugin";
+import queryPlugin from "@tanstack/eslint-plugin-query";
+import routerPlugin from "@tanstack/eslint-plugin-router";
+import jestDomPlugin from "eslint-plugin-jest-dom";
+import rtlPlugin from "eslint-plugin-testing-library";
+import tsPlugin from 'typescript-eslint';
+
+// General Notes:
+// - We use Biome as our primary linter. EsLint is only used for plugins that Biome doesn't support.
+// - The Convex Plugin version we have installed (1.1.1) is broken on EsLint 10.0.0. Don't upgrade EsLint until Convex releases a fix
+
+export default defineConfig([
+  globalIgnores([
+		"**/convex/_generated/**",
+		"**/src/routeTree.gen.ts",
+		"**/dist/**/*",
+		"**/node_modules/**",
+  ]),
+  {
+		files: ["**/*.ts", "**/*.tsx"],
+  },
+  tsPlugin.configs.base, // dependency of convex plugin; we use Biome for our base linting so use minimal install
+  ...convexPlugin.configs.recommended,
+  ...queryPlugin.configs['flat/recommended'],
+  ...routerPlugin.configs['flat/recommended'],
+  jestDomPlugin.configs["flat/recommended"],
+  rtlPlugin.configs["flat/react"],
+  {
+    files: ["**/*.ts", "**/*.tsx"],
+    ...tailwindPlugin.configs.recommended,
+    settings: {
+      "better-tailwindcss": {
+        entryPoint: "src/styles.css",
+        rootFontSize: 16
+      }
+    },
+    rules: {
+      ...tailwindPlugin.configs.recommended.rules,
+      "better-tailwindcss/enforce-canonical-classes": "error",
+      "better-tailwindcss/enforce-consistent-line-wrapping": "off",
+    }
+  }
+])

@@ -1,4 +1,10 @@
 node_modules
+
+#.env.local
+
+# npm lock file - bun.lock is the canonical lock file
+package-lock.json
+
 .DS_Store
 dist
 dist-ssr
@@ -11,3 +17,7 @@ count.txt
 .output
 .vinxi
 todos.json
+
+# Editor settings
+.vscode/settings.json
+.zed/settings.json

@@ -1,0 +1,81 @@
+name: PR Checks
+
+on:
+  pull_request:
+
+jobs:
+  lint-check:
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+      - name: Install Dependencies
+        run: bun install
+      - name: Lint Code
+        run: bun run lint
+  format-check:
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+      - name: Install Dependencies
+        run: bun install
+      - name: Check Code Formatting
+        run: bun run format
+  type-check:
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+      - name: Install Dependencies
+        run: bun install
+      - name: Check Types
+        run: bun run tsc --noEmit
+  test-check:
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+      - name: Install Dependencies
+        run: bun install
+      - name: Run Tests
+        run: bun run test
+  knip-check:
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+      - name: Install Dependencies
+        run: bun install
+      - name: Check for Unused Code
+        run: bun run knip
