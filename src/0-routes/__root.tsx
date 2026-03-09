@@ -11,7 +11,7 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import type { ReactNode } from "react";
 import { Toaster } from "sonner";
 
-import { getContext } from "#src/2-integrations/convex-and-query";
+import { getContext } from "#src/2-integrations/convex-and-query.tsx";
 
 import appCss from "#src/styles.css?url";
 

@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { useAppForm } from "#src/1-components/form";
+import { useAppForm } from "#src/1-components/form/index.ts";
 
 const formSchema = z.object({
 	userName: z.string().min(2, "First name must be at least 2 characters"),

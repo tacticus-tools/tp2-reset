@@ -4,7 +4,7 @@ import { Select as SelectPrimitive } from "@base-ui/react/select";
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import type { ComponentProps } from "react";
 
-import { cn } from "#src/4-lib/shadcn/utils";
+import { cn } from "#src/4-lib/shadcn/utils.ts";
 
 const Select = SelectPrimitive.Root;
 
