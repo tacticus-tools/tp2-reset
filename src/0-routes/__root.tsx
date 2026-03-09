@@ -11,11 +11,15 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import type { ReactNode } from "react";
 import { Toaster } from "sonner";
 
+import { getContext } from "#src/2-integrations/convex-and-query";
+
 import appCss from "#src/styles.css?url";
 
 interface MyRouterContext {
 	queryClient: QueryClient;
 }
+
+const { queryClient } = getContext();
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
 	head: () => ({
@@ -56,7 +60,10 @@ function RootDocument({ children }: { children: ReactNode }) {
 					}}
 					plugins={[
 						{ name: "Router", render: <TanStackRouterDevtoolsPanel /> },
-						{ name: "Query", render: <ReactQueryDevtoolsPanel /> },
+						{
+							name: "Query",
+							render: <ReactQueryDevtoolsPanel client={queryClient} />,
+						},
 						formDevtoolsPlugin(),
 					]}
 				/>
