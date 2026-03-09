@@ -20,11 +20,7 @@ const queryClient: QueryClient = new QueryClient({
 convexQueryClient.connect(queryClient);
 
 export function getContext() {
-	const queryClient = new QueryClient();
-	return {
-		queryClient,
-		convexQueryClient,
-	};
+	return { queryClient, convexQueryClient };
 }
 
 export const QueryProvider = ({ children }: { children: React.ReactNode }) => {
