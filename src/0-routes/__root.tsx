@@ -13,6 +13,9 @@ import { Toaster } from "sonner";
 
 import { getContext } from "#src/2-integrations/convex-and-query.tsx";
 
+import { AppLayout } from "#src/1-components/app/app-layout.tsx";
+import { TooltipProvider } from "#src/1-components/ui/tooltip.tsx";
+
 import appCss from "#src/styles.css?url";
 
 interface MyRouterContext {
@@ -53,22 +56,24 @@ function RootDocument({ children }: { children: ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
-				{children}
-				<TanStackDevtools
-					config={{
-						position: "bottom-right",
-					}}
-					plugins={[
-						{ name: "Router", render: <TanStackRouterDevtoolsPanel /> },
-						{
-							name: "Query",
-							render: <ReactQueryDevtoolsPanel client={queryClient} />,
-						},
-						formDevtoolsPlugin(),
-					]}
-				/>
-				<Toaster richColors theme="system" />
-				<Scripts />
+				<TooltipProvider>
+					<AppLayout>{children}</AppLayout>
+					<TanStackDevtools
+						config={{
+							position: "bottom-right",
+						}}
+						plugins={[
+							{ name: "Router", render: <TanStackRouterDevtoolsPanel /> },
+							{
+								name: "Query",
+								render: <ReactQueryDevtoolsPanel client={queryClient} />,
+							},
+							formDevtoolsPlugin(),
+						]}
+					/>
+					<Toaster richColors theme="system" />
+					<Scripts />
+				</TooltipProvider>
 			</body>
 		</html>
 	);
