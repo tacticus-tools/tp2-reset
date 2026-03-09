@@ -6,8 +6,13 @@ import {
 	ChevronsUpDownIcon,
 	CreditCardIcon,
 	LogOutIcon,
+	MonitorIcon,
+	MoonIcon,
 	SparklesIcon,
+	SunIcon,
 } from "lucide-react";
+
+import { useUserPreferencesStore } from "#src/3-hooks/use-user-preferences-store.ts";
 
 import {
 	Avatar,
@@ -30,6 +35,12 @@ import {
 	useSidebar,
 } from "#src/1-components/ui/sidebar.tsx";
 
+const THEME_OPTIONS = [
+	{ value: "light" as const, label: "Light", icon: SunIcon },
+	{ value: "dark" as const, label: "Dark", icon: MoonIcon },
+	{ value: "system" as const, label: "System", icon: MonitorIcon },
+];
+
 export function NavUser({
 	user,
 }: {
@@ -40,6 +51,8 @@ export function NavUser({
 	};
 }) {
 	const { isMobile } = useSidebar();
+	const { theme, setTheme } = useUserPreferencesStore();
+
 	return (
 		<SidebarMenu>
 			<SidebarMenuItem>
@@ -81,25 +94,22 @@ export function NavUser({
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
 						<DropdownMenuGroup>
-							<DropdownMenuItem>
-								<SparklesIcon />
-								Upgrade to Pro
-							</DropdownMenuItem>
-						</DropdownMenuGroup>
-						<DropdownMenuSeparator />
-						<DropdownMenuGroup>
-							<DropdownMenuItem>
-								<BadgeCheckIcon />
-								Account
-							</DropdownMenuItem>
-							<DropdownMenuItem>
-								<CreditCardIcon />
-								Billing
-							</DropdownMenuItem>
-							<DropdownMenuItem>
-								<BellIcon />
-								Notifications
-							</DropdownMenuItem>
+							<DropdownMenuLabel className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">
+								Theme
+							</DropdownMenuLabel>
+							{THEME_OPTIONS.map(({ value, label, icon: Icon }) => (
+								<DropdownMenuItem
+									key={value}
+									onClick={() => setTheme(value)}
+									className={theme === value ? "bg-accent" : ""}
+								>
+									<Icon className="size-4" />
+									{label}
+									{theme === value && (
+										<span className="ml-auto text-xs font-semibold">✓</span>
+									)}
+								</DropdownMenuItem>
+							))}
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem>
