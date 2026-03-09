@@ -1,7 +1,8 @@
-import { createRouter } from "@tanstack/react-router";
+import { createRouter, Link } from "@tanstack/react-router";
 import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
 
 import { routeTree } from "#src/routeTree.gen.ts";
+import { Button } from "./1-components/ui/button.tsx";
 import {
 	getContext,
 	QueryProvider,
@@ -35,6 +36,16 @@ export const getRouter = () => {
 				if (fromPath.startsWith(toPath)) return ["slide-right"]; // exit nested route
 				return [];
 			},
+		},
+		defaultNotFoundComponent: () => {
+			return (
+				<div>
+					<p>Not found!</p>
+					<Button>
+						<Link to="/">Go home</Link>
+					</Button>
+				</div>
+			);
 		},
 	});
 
