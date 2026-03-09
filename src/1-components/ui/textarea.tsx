@@ -1,5 +1,6 @@
 import type { ComponentProps } from "react";
-import { cn } from "#src/4-lib/utils";
+
+import { cn } from "#src/4-lib/shadcn/utils";
 
 function Textarea({ className, ...props }: ComponentProps<"textarea">) {
 	return (

@@ -1,13 +1,17 @@
+"use client";
+
 import { cva, type VariantProps } from "class-variance-authority";
 import type { ComponentProps } from "react";
+
+import { cn } from "#src/4-lib/shadcn/utils";
+
 import { Button } from "#src/1-components/ui/button";
 import { Input } from "#src/1-components/ui/input";
 import { Textarea } from "#src/1-components/ui/textarea";
-import { cn } from "#src/4-lib/utils";
 
 function InputGroup({ className, ...props }: ComponentProps<"div">) {
 	return (
-		// biome-ignore lint/a11y/useSemanticElements: I'm trusting ShadCN's implementation here
+		// biome-ignore lint/a11y/useSemanticElements: I'm trusting Shadcn on this one
 		<div
 			data-slot="input-group"
 			role="group"
@@ -47,9 +51,9 @@ function InputGroupAddon({
 	...props
 }: ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>) {
 	return (
-		// biome-ignore lint/a11y/useKeyWithClickEvents: I'm trusting ShadCN's implementation here
-		// biome-ignore lint/a11y/useSemanticElements: I'm trusting ShadCN's implementation here
-		// biome-ignore lint/a11y/noNoninteractiveElementInteractions: I'm trusting ShadCN's implementation here
+		// biome-ignore lint/a11y/noNoninteractiveElementInteractions: I'm trusting Shadcn on this one
+		// biome-ignore lint/a11y/useKeyWithClickEvents: I'm trusting Shadcn on this one
+		// biome-ignore lint/a11y/useSemanticElements: I'm trusting Shadcn on this one
 		<div
 			role="group"
 			data-slot="input-group-addon"
@@ -90,8 +94,10 @@ function InputGroupButton({
 	variant = "ghost",
 	size = "xs",
 	...props
-}: Omit<ComponentProps<typeof Button>, "size"> &
-	VariantProps<typeof inputGroupButtonVariants>) {
+}: Omit<ComponentProps<typeof Button>, "size" | "type"> &
+	VariantProps<typeof inputGroupButtonVariants> & {
+		type?: "button" | "submit" | "reset";
+	}) {
 	return (
 		<Button
 			type={type}

@@ -1,9 +1,11 @@
+import { Input as InputPrimitive } from "@base-ui/react/input";
 import type { ComponentProps } from "react";
-import { cn } from "#src/4-lib/utils";
+
+import { cn } from "#src/4-lib/shadcn/utils";
 
 function Input({ className, type, ...props }: ComponentProps<"input">) {
 	return (
-		<input
+		<InputPrimitive
 			type={type}
 			data-slot="input"
 			className={cn(

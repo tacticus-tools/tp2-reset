@@ -24,7 +24,35 @@
 		"enabled": true,
 		"indentStyle": "tab"
 	},
-	"assist": { "actions": { "source": { "organizeImports": "on" } } },
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": {
+					"level": "on",
+					"options": {
+						"groups": [
+							[":BUN:", ":NODE:"],
+							":BLANK_LINE:",
+							[":PACKAGE:", ":PACKAGE_WITH_PROTOCOL:"],
+							":BLANK_LINE:",
+							["#common/**"],
+							":BLANK_LINE:",
+							["#src/5-*/**"],
+							":BLANK_LINE:",
+							["#src/4-*/**"],
+							":BLANK_LINE:",
+							["#src/3-*/**"],
+							":BLANK_LINE:",
+							["#src/2-*/**"],
+							":BLANK_LINE:",
+							["#src/1-*/**"],
+							":BLANK_LINE:"
+						]
+					}
+				}
+			}
+		}
+	},
 	"linter": {
 		"enabled": true,
 		"rules": {

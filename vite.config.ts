@@ -1,5 +1,6 @@
 // biome-ignore lint/correctness/noNodejsModules: server-side config file, false positive
 import { fileURLToPath, URL } from "node:url";
+
 import { cloudflare } from "@cloudflare/vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
 import { devtools } from "@tanstack/devtools-vite";

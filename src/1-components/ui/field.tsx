@@ -1,8 +1,11 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { type ComponentProps, useMemo } from "react";
+import type { ComponentProps } from "react";
+import { useMemo } from "react";
+
+import { cn } from "#src/4-lib/shadcn/utils";
+
 import { Label } from "#src/1-components/ui/label";
 import { Separator } from "#src/1-components/ui/separator";
-import { cn } from "#src/4-lib/utils";
 
 function FieldSet({ className, ...props }: ComponentProps<"fieldset">) {
 	return (
@@ -72,7 +75,7 @@ function Field({
 	...props
 }: ComponentProps<"div"> & VariantProps<typeof fieldVariants>) {
 	return (
-		// biome-ignore lint/a11y/useSemanticElements: I'm trusting ShadCN's implementation here
+		// biome-ignore lint/a11y/useSemanticElements: I'm trusting Shadcn on this one
 		<div
 			role="group"
 			data-slot="field"
@@ -196,9 +199,8 @@ function FieldError({
 		return (
 			<ul className="ml-4 flex list-disc flex-col gap-1">
 				{uniqueErrors.map(
-					(error, index) =>
-						// biome-ignore lint/suspicious/noArrayIndexKey: I'm trusting ShadCN's implementation here
-						error?.message && <li key={index}>{error.message}</li>,
+					(error) =>
+						error?.message && <li key={error.message}>{error.message}</li>,
 				)}
 			</ul>
 		);
