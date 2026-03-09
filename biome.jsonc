@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.4.6/schema.json",
 	"vcs": {
 		"enabled": false,
 		"clientKind": "git",
@@ -61,7 +61,8 @@
 				"noBlankTarget": "error",
 				"noDangerouslySetInnerHtml": "error",
 				"noDangerouslySetInnerHtmlWithChildren": "error",
-				"noGlobalEval": "error"
+				"noGlobalEval": "error",
+				"noSecrets": "off"
 			},
 			"performance": {
 				"noAccumulatingSpread": "error",
@@ -143,19 +144,17 @@
 				"useUniqueElementIds": "error",
 				"useValidForDirection": "error",
 				"useValidTypeof": "error",
-				"useYield": "error"
-			},
-			"nursery": {
-				"noSecrets": "off", // See https://github.com/biomejs/biome/issues/9114
+				"useYield": "error",
 				"noNextAsyncClientComponent": "error",
 				"noQwikUseVisibleTask": "off",
-				"noUnresolvedImports": "off", // https://github.com/biomejs/biome/issues/9143
+				"noUnresolvedImports": "off",
 				"noVueDataObjectDeclaration": "off",
 				"noVueReservedKeys": "off",
 				"noVueReservedProps": "off",
 				"useImageSize": "error",
 				"useQwikClasslist": "off"
-			}
+			},
+			"nursery": {}
 		}
 	},
 	"javascript": {

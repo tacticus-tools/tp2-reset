@@ -3,11 +3,11 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import type { ComponentProps } from "react";
 
-import { cn } from "#src/4-lib/shadcn/utils";
+import { cn } from "#src/4-lib/shadcn/utils.ts";
 
-import { Button } from "#src/1-components/ui/button";
-import { Input } from "#src/1-components/ui/input";
-import { Textarea } from "#src/1-components/ui/textarea";
+import { Button } from "#src/1-components/ui/button.tsx";
+import { Input } from "#src/1-components/ui/input.tsx";
+import { Textarea } from "#src/1-components/ui/textarea.tsx";
 
 function InputGroup({ className, ...props }: ComponentProps<"div">) {
 	return (

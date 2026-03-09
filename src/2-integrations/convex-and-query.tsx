@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConvexProvider } from "convex/react";
 import type { ReactNode } from "react";
 
-import { env } from "#src/env";
+import { env } from "#src/env.ts";
 
 const convexQueryClient = new ConvexQueryClient(env.VITE_CONVEX_URL);
 
