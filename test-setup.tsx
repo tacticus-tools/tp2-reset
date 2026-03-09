@@ -1,12 +1,13 @@
 // biome-ignore lint/performance/noNamespaceImport: Test env and this is the recommended way in the docs
 import * as matchers from "@testing-library/jest-dom/matchers";
+import type { ReactNode } from "react";
 import { expect, vi } from "vitest";
 
 expect.extend(matchers);
 
 // Tanstack React Router uses some features that are not available in the testing environment, so we need to mock it.
 vi.mock("@tanstack/react-router", () => ({
-	Link: ({ children, to }: { children: React.ReactNode; to: string }) => (
+	Link: ({ children, to }: { children: ReactNode; to: string }) => (
 		<a href={to}>{children}</a>
 	),
 	useRouter: () => ({

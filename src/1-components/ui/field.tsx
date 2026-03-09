@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import type { ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { useMemo } from "react";
 
 import { cn } from "#src/4-lib/shadcn/utils";
@@ -146,7 +146,7 @@ function FieldSeparator({
 	className,
 	...props
 }: ComponentProps<"div"> & {
-	children?: React.ReactNode;
+	children?: ReactNode;
 }) {
 	return (
 		<div

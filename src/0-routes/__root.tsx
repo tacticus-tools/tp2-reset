@@ -8,6 +8,7 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import type { ReactNode } from "react";
 import { Toaster } from "sonner";
 
 import appCss from "#src/styles.css?url";
@@ -41,7 +42,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 	shellComponent: RootDocument,
 });
 
-function RootDocument({ children }: { children: React.ReactNode }) {
+function RootDocument({ children }: { children: ReactNode }) {
 	return (
 		<html lang="en">
 			<head>
