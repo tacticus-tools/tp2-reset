@@ -1,14 +1,12 @@
 "use client";
 
+import { Link } from "@tanstack/react-router";
 import {
 	BadgeCheckIcon,
-	BellIcon,
 	ChevronsUpDownIcon,
-	CreditCardIcon,
 	LogOutIcon,
 	MonitorIcon,
 	MoonIcon,
-	SparklesIcon,
 	SunIcon,
 } from "lucide-react";
 
@@ -110,6 +108,15 @@ export function NavUser({
 									)}
 								</DropdownMenuItem>
 							))}
+						</DropdownMenuGroup>
+						<DropdownMenuSeparator />
+						<DropdownMenuGroup>
+							<DropdownMenuItem>
+								<Link to="/settings" className="flex w-full items-center gap-2">
+									<BadgeCheckIcon />
+									Settings
+								</Link>
+							</DropdownMenuItem>
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem>
