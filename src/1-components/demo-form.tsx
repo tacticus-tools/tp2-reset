@@ -1,5 +1,7 @@
+import type { CSSProperties } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
+
 import { useAppForm } from "#src/1-components/form";
 
 const formSchema = z.object({
@@ -31,7 +33,7 @@ export function DemoForm() {
 				},
 				style: {
 					"--border-radius": "calc(var(--radius)  + 4px)",
-				} as React.CSSProperties,
+				} as CSSProperties,
 			});
 		},
 	});

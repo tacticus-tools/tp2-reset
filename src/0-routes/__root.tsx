@@ -1,20 +1,25 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { formDevtoolsPlugin } from "@tanstack/react-form-devtools";
 import type { QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
 import {
 	createRootRouteWithContext,
 	HeadContent,
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import type { ReactNode } from "react";
 import { Toaster } from "sonner";
-import ConvexProvider from "#src/2-integrations/convex/provider.tsx";
-import TanStackQueryDevtools from "#src/2-integrations/tanstack-query/devtools.tsx";
+
+import { getContext } from "#src/2-integrations/convex-and-query";
+
 import appCss from "#src/styles.css?url";
 
 interface MyRouterContext {
 	queryClient: QueryClient;
 }
+
+const { queryClient } = getContext();
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
 	head: () => ({
@@ -41,29 +46,27 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 	shellComponent: RootDocument,
 });
 
-function RootDocument({ children }: { children: React.ReactNode }) {
+function RootDocument({ children }: { children: ReactNode }) {
 	return (
 		<html lang="en">
 			<head>
 				<HeadContent />
 			</head>
 			<body>
-				<ConvexProvider>
-					{children}
-					<TanStackDevtools
-						config={{
-							position: "bottom-right",
-						}}
-						plugins={[
-							{
-								name: "Tanstack Router",
-								render: <TanStackRouterDevtoolsPanel />,
-							},
-							TanStackQueryDevtools,
-							formDevtoolsPlugin(),
-						]}
-					/>
-				</ConvexProvider>
+				{children}
+				<TanStackDevtools
+					config={{
+						position: "bottom-right",
+					}}
+					plugins={[
+						{ name: "Router", render: <TanStackRouterDevtoolsPanel /> },
+						{
+							name: "Query",
+							render: <ReactQueryDevtoolsPanel client={queryClient} />,
+						},
+						formDevtoolsPlugin(),
+					]}
+				/>
 				<Toaster richColors theme="system" />
 				<Scripts />
 			</body>

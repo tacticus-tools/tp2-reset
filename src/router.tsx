@@ -1,20 +1,19 @@
 import { createRouter } from "@tanstack/react-router";
 import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
-import { getContext } from "./2-integrations/tanstack-query/root-provider.tsx";
 
-// Import the generated route tree
-import { routeTree } from "./routeTree.gen.ts";
+import { routeTree } from "#src/routeTree.gen.ts";
+import {
+	getContext,
+	QueryProvider,
+} from "./2-integrations/convex-and-query.tsx";
 
-// Create a new router instance
 export const getRouter = () => {
 	const rqContext = getContext();
 
 	const router = createRouter({
 		routeTree,
-		context: {
-			...rqContext,
-		},
-
+		Wrap: ({ children }) => <QueryProvider>{children}</QueryProvider>, // Wrapped at the router level to allow for preloading data on intent
+		context: { ...rqContext },
 		defaultPreload: "intent",
 	});
 

@@ -25,7 +25,7 @@ export const SelectField = ({
 	options,
 	placeholder,
 }: SelectFieldProps) => {
-	const field = useFieldContext<string>();
+	const field = useFieldContext<string | null>();
 
 	return (
 		<div className="space-y-2">

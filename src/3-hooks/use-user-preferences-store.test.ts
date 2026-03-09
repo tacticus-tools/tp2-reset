@@ -1,6 +1,7 @@
 import { act, renderHook } from "@testing-library/react";
 import { afterEach, beforeEach, expect, test } from "vitest";
 import z from "zod";
+
 import { useUserPreferencesStore } from "./use-user-preferences-store.ts";
 
 beforeEach(() => {
