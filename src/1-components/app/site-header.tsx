@@ -1,3 +1,5 @@
+import { Link, useLocation, useMatches } from "@tanstack/react-router";
+
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -9,7 +11,17 @@ import {
 import { Separator } from "#src/1-components/ui/separator.tsx";
 import { SidebarTrigger } from "#src/1-components/ui/sidebar.tsx";
 
+function hasLinkTitle<T extends ReturnType<typeof useMatches>[number]>(
+	route: T,
+): route is T & { options: { staticData: { getTitle: () => string } } } {
+	return !!route.staticData.getTitle();
+}
+
 export function SiteHeader() {
+	const pathname = useLocation({ select: (loc) => loc.pathname });
+	const matches = useMatches();
+	if (matches.some((match) => match.status === "pending")) return null;
+
 	return (
 		<header className="flex h-16 shrink-0 items-center gap-2">
 			<div className="flex items-center gap-2 px-4">
@@ -20,13 +32,25 @@ export function SiteHeader() {
 				/>
 				<Breadcrumb>
 					<BreadcrumbList>
-						<BreadcrumbItem className="hidden md:block">
-							<BreadcrumbLink href="#">Build Your Application</BreadcrumbLink>
-						</BreadcrumbItem>
-						<BreadcrumbSeparator className="hidden md:block" />
-						<BreadcrumbItem>
-							<BreadcrumbPage>Data Fetching</BreadcrumbPage>
-						</BreadcrumbItem>
+						{matches.filter(hasLinkTitle).map((match) => (
+							<>
+								<BreadcrumbSeparator />
+								<BreadcrumbItem key={match.pathname}>
+									{match.pathname !== pathname && (
+										<BreadcrumbLink>
+											<Link to={match.pathname}>
+												{match.staticData.getTitle()}
+											</Link>
+										</BreadcrumbLink>
+									)}
+									{match.pathname === pathname && (
+										<BreadcrumbPage>
+											{match.staticData.getTitle()}
+										</BreadcrumbPage>
+									)}
+								</BreadcrumbItem>
+							</>
+						))}
 					</BreadcrumbList>
 				</Breadcrumb>
 			</div>

@@ -35,7 +35,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 				content: "width=device-width, initial-scale=1",
 			},
 			{
-				title: "TanStack Start Starter",
+				title: "TP2 Reset",
 			},
 		],
 		links: [
@@ -47,6 +47,10 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 	}),
 
 	shellComponent: RootDocument,
+	staticData: {
+		getTitle: () => "TP2",
+		getDescription: () => "A potential successor to Tacticus Planner",
+	},
 });
 
 function RootDocument({ children }: { children: ReactNode }) {

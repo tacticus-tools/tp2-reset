@@ -11,8 +11,8 @@ export function AppLayout({ children }: React.PropsWithChildren) {
 		<div className="[--header-height:calc(--spacing(14))]">
 			<SidebarProvider className="flex flex-col">
 				<div className="flex flex-1">
-					<AppSidebar />
-					<SidebarInset>
+					<AppSidebar className="[view-transition-name:sidebar]" />
+					<SidebarInset className="[view-transition-name:main-content]">
 						<SiteHeader />
 						<main className="pl-2">{children}</main>
 					</SidebarInset>
