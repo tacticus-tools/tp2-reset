@@ -1,6 +1,7 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { formDevtoolsPlugin } from "@tanstack/react-form-devtools";
 import type { QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
 import {
 	createRootRouteWithContext,
 	HeadContent,
@@ -8,9 +9,6 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { Toaster } from "sonner";
-
-import ConvexProvider from "#src/2-integrations/convex/provider.tsx";
-import TanStackQueryDevtools from "#src/2-integrations/tanstack-query/devtools.tsx";
 
 import appCss from "#src/styles.css?url";
 
@@ -50,22 +48,17 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
-				<ConvexProvider>
-					{children}
-					<TanStackDevtools
-						config={{
-							position: "bottom-right",
-						}}
-						plugins={[
-							{
-								name: "Tanstack Router",
-								render: <TanStackRouterDevtoolsPanel />,
-							},
-							TanStackQueryDevtools,
-							formDevtoolsPlugin(),
-						]}
-					/>
-				</ConvexProvider>
+				{children}
+				<TanStackDevtools
+					config={{
+						position: "bottom-right",
+					}}
+					plugins={[
+						{ name: "Router", render: <TanStackRouterDevtoolsPanel /> },
+						{ name: "Query", render: <ReactQueryDevtoolsPanel /> },
+						formDevtoolsPlugin(),
+					]}
+				/>
 				<Toaster richColors theme="system" />
 				<Scripts />
 			</body>
