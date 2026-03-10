@@ -10,11 +10,22 @@
 
 import { Route as rootRouteImport } from './0-routes/__root'
 import { Route as SettingsRouteImport } from './0-routes/settings'
+import { Route as PlanRouteRouteImport } from './0-routes/plan/route'
 import { Route as IndexRouteImport } from './0-routes/index'
+import { Route as PlanIndexRouteImport } from './0-routes/plan/index'
+import { Route as PlanLreRouteRouteImport } from './0-routes/plan/lre/route'
+import { Route as PlanLreIndexRouteImport } from './0-routes/plan/lre/index'
+import { Route as PlanLreTrajannRouteImport } from './0-routes/plan/lre/trajann'
+import { Route as PlanLreLuciusRouteImport } from './0-routes/plan/lre/lucius'
 
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanRouteRoute = PlanRouteRouteImport.update({
+  id: '/plan',
+  path: '/plan',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -22,30 +33,95 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlanIndexRoute = PlanIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PlanRouteRoute,
+} as any)
+const PlanLreRouteRoute = PlanLreRouteRouteImport.update({
+  id: '/lre',
+  path: '/lre',
+  getParentRoute: () => PlanRouteRoute,
+} as any)
+const PlanLreIndexRoute = PlanLreIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PlanLreRouteRoute,
+} as any)
+const PlanLreTrajannRoute = PlanLreTrajannRouteImport.update({
+  id: '/trajann',
+  path: '/trajann',
+  getParentRoute: () => PlanLreRouteRoute,
+} as any)
+const PlanLreLuciusRoute = PlanLreLuciusRouteImport.update({
+  id: '/lucius',
+  path: '/lucius',
+  getParentRoute: () => PlanLreRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/plan': typeof PlanRouteRouteWithChildren
   '/settings': typeof SettingsRoute
+  '/plan/lre': typeof PlanLreRouteRouteWithChildren
+  '/plan/': typeof PlanIndexRoute
+  '/plan/lre/lucius': typeof PlanLreLuciusRoute
+  '/plan/lre/trajann': typeof PlanLreTrajannRoute
+  '/plan/lre/': typeof PlanLreIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/settings': typeof SettingsRoute
+  '/plan': typeof PlanIndexRoute
+  '/plan/lre/lucius': typeof PlanLreLuciusRoute
+  '/plan/lre/trajann': typeof PlanLreTrajannRoute
+  '/plan/lre': typeof PlanLreIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/plan': typeof PlanRouteRouteWithChildren
   '/settings': typeof SettingsRoute
+  '/plan/lre': typeof PlanLreRouteRouteWithChildren
+  '/plan/': typeof PlanIndexRoute
+  '/plan/lre/lucius': typeof PlanLreLuciusRoute
+  '/plan/lre/trajann': typeof PlanLreTrajannRoute
+  '/plan/lre/': typeof PlanLreIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/settings'
+  fullPaths:
+    | '/'
+    | '/plan'
+    | '/settings'
+    | '/plan/lre'
+    | '/plan/'
+    | '/plan/lre/lucius'
+    | '/plan/lre/trajann'
+    | '/plan/lre/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/settings'
-  id: '__root__' | '/' | '/settings'
+  to:
+    | '/'
+    | '/settings'
+    | '/plan'
+    | '/plan/lre/lucius'
+    | '/plan/lre/trajann'
+    | '/plan/lre'
+  id:
+    | '__root__'
+    | '/'
+    | '/plan'
+    | '/settings'
+    | '/plan/lre'
+    | '/plan/'
+    | '/plan/lre/lucius'
+    | '/plan/lre/trajann'
+    | '/plan/lre/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PlanRouteRoute: typeof PlanRouteRouteWithChildren
   SettingsRoute: typeof SettingsRoute
 }
 
@@ -58,6 +134,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/plan': {
+      id: '/plan'
+      path: '/plan'
+      fullPath: '/plan'
+      preLoaderRoute: typeof PlanRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -65,11 +148,77 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/plan/': {
+      id: '/plan/'
+      path: '/'
+      fullPath: '/plan/'
+      preLoaderRoute: typeof PlanIndexRouteImport
+      parentRoute: typeof PlanRouteRoute
+    }
+    '/plan/lre': {
+      id: '/plan/lre'
+      path: '/lre'
+      fullPath: '/plan/lre'
+      preLoaderRoute: typeof PlanLreRouteRouteImport
+      parentRoute: typeof PlanRouteRoute
+    }
+    '/plan/lre/': {
+      id: '/plan/lre/'
+      path: '/'
+      fullPath: '/plan/lre/'
+      preLoaderRoute: typeof PlanLreIndexRouteImport
+      parentRoute: typeof PlanLreRouteRoute
+    }
+    '/plan/lre/trajann': {
+      id: '/plan/lre/trajann'
+      path: '/trajann'
+      fullPath: '/plan/lre/trajann'
+      preLoaderRoute: typeof PlanLreTrajannRouteImport
+      parentRoute: typeof PlanLreRouteRoute
+    }
+    '/plan/lre/lucius': {
+      id: '/plan/lre/lucius'
+      path: '/lucius'
+      fullPath: '/plan/lre/lucius'
+      preLoaderRoute: typeof PlanLreLuciusRouteImport
+      parentRoute: typeof PlanLreRouteRoute
+    }
   }
 }
 
+interface PlanLreRouteRouteChildren {
+  PlanLreLuciusRoute: typeof PlanLreLuciusRoute
+  PlanLreTrajannRoute: typeof PlanLreTrajannRoute
+  PlanLreIndexRoute: typeof PlanLreIndexRoute
+}
+
+const PlanLreRouteRouteChildren: PlanLreRouteRouteChildren = {
+  PlanLreLuciusRoute: PlanLreLuciusRoute,
+  PlanLreTrajannRoute: PlanLreTrajannRoute,
+  PlanLreIndexRoute: PlanLreIndexRoute,
+}
+
+const PlanLreRouteRouteWithChildren = PlanLreRouteRoute._addFileChildren(
+  PlanLreRouteRouteChildren,
+)
+
+interface PlanRouteRouteChildren {
+  PlanLreRouteRoute: typeof PlanLreRouteRouteWithChildren
+  PlanIndexRoute: typeof PlanIndexRoute
+}
+
+const PlanRouteRouteChildren: PlanRouteRouteChildren = {
+  PlanLreRouteRoute: PlanLreRouteRouteWithChildren,
+  PlanIndexRoute: PlanIndexRoute,
+}
+
+const PlanRouteRouteWithChildren = PlanRouteRoute._addFileChildren(
+  PlanRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PlanRouteRoute: PlanRouteRouteWithChildren,
   SettingsRoute: SettingsRoute,
 }
 export const routeTree = rootRouteImport
