@@ -61,7 +61,10 @@ export function NavMain() {
 						<SidebarMenuButton render={<Link to="/" />} children="Onslaught" />
 					</SidebarMenuItem>
 					<SidebarMenuItem>
-						<SidebarMenuButton render={<Link to="/" />} children="Salvage Run" />
+						<SidebarMenuButton
+							render={<Link to="/" />}
+							children="Salvage Run"
+						/>
 					</SidebarMenuItem>
 					<SidebarMenuItem>
 						<SidebarMenuButton render={<Link to="/" />} children="Equipment" />
