@@ -1,12 +1,14 @@
 import { createRouter, Link } from "@tanstack/react-router";
 import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
 
-import { routeTree } from "#src/routeTree.gen.ts";
-import { Button } from "./1-components/ui/button.tsx";
 import {
 	getContext,
 	QueryProvider,
-} from "./2-integrations/convex-and-query.tsx";
+} from "#src/2-integrations/convex-and-query.tsx";
+
+import { Button } from "#src/1-components/ui/button.tsx";
+
+import { routeTree } from "#src/routeTree.gen.ts";
 
 declare module "@tanstack/react-router" {
 	interface StaticDataRouteOption {
