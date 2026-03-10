@@ -1,4 +1,5 @@
 import { Link, useLocation, useMatches } from "@tanstack/react-router";
+import { Fragment } from "react";
 
 import {
 	Breadcrumb,
@@ -33,9 +34,9 @@ export function SiteHeader() {
 				<Breadcrumb>
 					<BreadcrumbList>
 						{matches.filter(hasLinkTitle).map((match) => (
-							<>
+							<Fragment key={match.id}>
 								<BreadcrumbSeparator />
-								<BreadcrumbItem key={match.pathname}>
+								<BreadcrumbItem>
 									{match.pathname !== pathname && (
 										<BreadcrumbLink>
 											<Link to={match.pathname}>
@@ -49,7 +50,7 @@ export function SiteHeader() {
 										</BreadcrumbPage>
 									)}
 								</BreadcrumbItem>
-							</>
+							</Fragment>
 						))}
 					</BreadcrumbList>
 				</Breadcrumb>
