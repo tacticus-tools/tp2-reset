@@ -2,10 +2,7 @@ import {
 	AudioLinesIcon,
 	BookOpenIcon,
 	BotIcon,
-	FrameIcon,
 	GalleryVerticalEndIcon,
-	MapIcon,
-	PieChartIcon,
 	Settings2Icon,
 	TerminalIcon,
 	TerminalSquareIcon,
@@ -13,7 +10,6 @@ import {
 import type * as React from "react";
 
 import { NavMain } from "#src/1-components/app/nav-main.tsx";
-import { NavProjects } from "#src/1-components/app/nav-projects.tsx";
 import { NavUser } from "#src/1-components/app/nav-user.tsx";
 import { TeamSwitcher } from "#src/1-components/app/team-switcher.tsx";
 import {
@@ -135,23 +131,6 @@ const data = {
 			],
 		},
 	],
-	projects: [
-		{
-			name: "Design Engineering",
-			url: "#",
-			icon: <FrameIcon />,
-		},
-		{
-			name: "Sales & Marketing",
-			url: "#",
-			icon: <PieChartIcon />,
-		},
-		{
-			name: "Travel",
-			url: "#",
-			icon: <MapIcon />,
-		},
-	],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -162,7 +141,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 			</SidebarHeader>
 			<SidebarContent>
 				<NavMain items={data.navMain} />
-				<NavProjects projects={data.projects} />
 			</SidebarContent>
 			<SidebarFooter>
 				<NavUser user={data.user} />
