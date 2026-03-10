@@ -1,4 +1,4 @@
-import { Link, useLocation, useMatches } from "@tanstack/react-router";
+import { Link, useLocation, useRouterState } from "@tanstack/react-router";
 import { Fragment } from "react";
 
 import {
@@ -12,16 +12,18 @@ import {
 import { Separator } from "#src/1-components/ui/separator.tsx";
 import { SidebarTrigger } from "#src/1-components/ui/sidebar.tsx";
 
-function hasLinkTitle<T extends ReturnType<typeof useMatches>[number]>(
-	route: T,
-): route is T & { options: { staticData: { getTitle: () => string } } } {
-	return typeof route.staticData?.getTitle === "function";
-}
-
 export function SiteHeader() {
-	const pathname = useLocation({ select: (loc) => loc.pathname });
-	const matches = useMatches();
-	if (matches.some((match) => match.status === "pending")) return null;
+	const path = useLocation({ select: (location) => location.pathname });
+	const { matches } = useRouterState();
+
+	const breadcrumbs = matches
+		.filter((match) => match.context.title)
+		.map(({ pathname, context }) => {
+			return {
+				title: context.title,
+				path: pathname,
+			};
+		});
 
 	return (
 		<header className="flex h-16 shrink-0 items-center gap-2">
@@ -33,25 +35,33 @@ export function SiteHeader() {
 				/>
 				<Breadcrumb>
 					<BreadcrumbList>
-						{matches.filter(hasLinkTitle).map((match, index) => (
-							<Fragment key={match.id}>
-								{index > 0 && <BreadcrumbSeparator />}
-								<BreadcrumbItem>
-									{match.pathname !== pathname && (
-										<BreadcrumbLink>
-											<Link to={match.pathname}>
-												{match.staticData.getTitle()}
-											</Link>
-										</BreadcrumbLink>
+						{breadcrumbs.map((match, index) => {
+							// Index routes have the same path as their layout route with a slash added, so we skip them in the breadcrumbs
+							if (match.path === `${path}/`) return undefined;
+
+							// The root route and root page have the same path, so only show the first one.
+							if (match.path === "/" && index !== 0) return undefined;
+
+							return (
+								<Fragment key={match.path}>
+									{match.path !== path && (
+										<>
+											<BreadcrumbItem>
+												<BreadcrumbLink render={<Link to={match.path} />}>
+													{match.title}
+												</BreadcrumbLink>
+											</BreadcrumbItem>
+											<BreadcrumbSeparator />
+										</>
 									)}
-									{match.pathname === pathname && (
-										<BreadcrumbPage>
-											{match.staticData.getTitle()}
-										</BreadcrumbPage>
+									{match.path === path && (
+										<BreadcrumbItem>
+											<BreadcrumbPage>{match.title}</BreadcrumbPage>
+										</BreadcrumbItem>
 									)}
-								</BreadcrumbItem>
-							</Fragment>
-						))}
+								</Fragment>
+							);
+						})}
 					</BreadcrumbList>
 				</Breadcrumb>
 			</div>
