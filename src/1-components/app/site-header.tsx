@@ -15,7 +15,7 @@ import { SidebarTrigger } from "#src/1-components/ui/sidebar.tsx";
 function hasLinkTitle<T extends ReturnType<typeof useMatches>[number]>(
 	route: T,
 ): route is T & { options: { staticData: { getTitle: () => string } } } {
-	return !!route.staticData.getTitle();
+	return typeof route.staticData?.getTitle === "function";
 }
 
 export function SiteHeader() {
