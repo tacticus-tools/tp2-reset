@@ -20,6 +20,7 @@ import appCss from "#src/styles.css?url";
 
 interface MyRouterContext {
 	queryClient: QueryClient;
+	title: string;
 }
 
 const { queryClient } = getContext();
@@ -47,10 +48,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 	}),
 
 	shellComponent: RootDocument,
-	staticData: {
-		getTitle: () => "TP2",
-		getDescription: () => "A potential successor to Tacticus Planner",
-	},
 });
 
 function RootDocument({ children }: { children: ReactNode }) {

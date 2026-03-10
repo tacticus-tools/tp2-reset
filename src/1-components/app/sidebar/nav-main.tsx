@@ -41,11 +41,11 @@ export function NavMain() {
 							<SidebarMenuSub>
 								<SidebarMenuSubItem>
 									<SidebarMenuSubButton
-										render={<Link to="/" />}
+										render={<Link to="/plan/lre/trajann" />}
 										children="Trajann"
 									/>
 									<SidebarMenuSubButton
-										render={<Link to="/" />}
+										render={<Link to="/plan/lre/lucius" />}
 										children="Lucius"
 									/>
 								</SidebarMenuSubItem>
