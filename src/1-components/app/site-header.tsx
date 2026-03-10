@@ -33,9 +33,9 @@ export function SiteHeader() {
 				/>
 				<Breadcrumb>
 					<BreadcrumbList>
-						{matches.filter(hasLinkTitle).map((match) => (
+						{matches.filter(hasLinkTitle).map((match, index) => (
 							<Fragment key={match.id}>
-								<BreadcrumbSeparator />
+								{index > 0 && <BreadcrumbSeparator />}
 								<BreadcrumbItem>
 									{match.pathname !== pathname && (
 										<BreadcrumbLink>
