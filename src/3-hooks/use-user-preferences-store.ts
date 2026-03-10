@@ -11,22 +11,26 @@ interface UserPreferencesState {
 	setSidebarOpen: (state: boolean) => void;
 }
 
+function applyThemeToDOM(theme: Theme) {
+	const root = window.document.documentElement;
+	root.classList.remove("light", "dark");
+	if (theme === "system") {
+		const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+			.matches
+			? "dark"
+			: "light";
+		root.classList.add(systemTheme);
+	} else {
+		root.classList.add(theme);
+	}
+}
+
 export const useUserPreferencesStore = create<UserPreferencesState>()(
 	persist(
 		(set) => ({
 			theme: "system",
 			setTheme: (theme) => {
-				const root = window.document.documentElement;
-				root.classList.remove("light", "dark");
-				if (theme === "system") {
-					const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-						.matches
-						? "dark"
-						: "light";
-					root.classList.add(systemTheme);
-				} else {
-					root.classList.add(theme);
-				}
+				applyThemeToDOM(theme);
 				set({ theme });
 			},
 			sidebarOpen: true,
@@ -34,6 +38,9 @@ export const useUserPreferencesStore = create<UserPreferencesState>()(
 		}),
 		{
 			name: "user-preferences-storage",
+			onRehydrateStorage: () => (state) => {
+				if (state?.theme) applyThemeToDOM(state.theme);
+			},
 		},
 	),
 );
