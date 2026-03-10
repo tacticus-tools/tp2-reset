@@ -55,7 +55,10 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function RootDocument({ children }: { children: ReactNode }) {
 	return (
-		<html lang="en">
+		// Suppress the hydration warning that occurs from `className="dark"` being added to the document element on the client, which is required for dark mode support.
+		// Default to dark mode to prevent a flash of light mode for dark mode users on initial load - less jarring for a flash of dark for light mode users
+		// eslint-disable-next-line better-tailwindcss/no-unknown-classes
+		<html lang="en" className="dark"suppressHydrationWarning>
 			<head>
 				<HeadContent />
 			</head>
