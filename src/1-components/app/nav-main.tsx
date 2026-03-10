@@ -1,6 +1,7 @@
 "use client";
 
-import { ChevronRightIcon } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ChevronRightIcon, Sword } from "lucide-react";
 
 import {
 	Collapsible,
@@ -18,53 +19,58 @@ import {
 	SidebarMenuSubItem,
 } from "#src/1-components/ui/sidebar.tsx";
 
-export function NavMain({
-	items,
-}: {
-	items: {
-		title: string;
-		url: string;
-		icon?: React.ReactNode;
-		isActive?: boolean;
-		items?: {
-			title: string;
-			url: string;
-		}[];
-	}[];
-}) {
+export function NavMain() {
 	return (
-		<SidebarGroup>
-			<SidebarGroupLabel>Platform</SidebarGroupLabel>
-			<SidebarMenu>
-				{items.map((item) => (
+		<>
+			<SidebarGroup>
+				<SidebarGroupLabel>Plan</SidebarGroupLabel>
+				<SidebarMenu>
 					<Collapsible
-						key={item.title}
-						defaultOpen={item.isActive}
+						defaultOpen
 						className="group/collapsible"
 						render={<SidebarMenuItem />}
 					>
 						<CollapsibleTrigger
-							render={<SidebarMenuButton tooltip={item.title} />}
+							render={<SidebarMenuButton tooltip="Legendary Release Events" />}
 						>
-							{item.icon}
-							<span>{item.title}</span>
+							<Sword />
+							<span>Legendary Release Events</span>
 							<ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-open/collapsible:rotate-90" />
 						</CollapsibleTrigger>
 						<CollapsibleContent>
 							<SidebarMenuSub>
-								{item.items?.map((subItem) => (
-									<SidebarMenuSubItem key={subItem.title}>
-										{/* biome-ignore lint/a11y/useAnchorContent: I'm trusting Shadcn on this one */}
-										<SidebarMenuSubButton render={<a href={subItem.url} />}>
-											<span>{subItem.title}</span>
-										</SidebarMenuSubButton>
-									</SidebarMenuSubItem>
-								))}
+								<SidebarMenuSubItem>
+									<SidebarMenuSubButton
+										render={<Link to="/" />}
+										children="Trajann"
+									/>
+									<SidebarMenuSubButton
+										render={<Link to="/" />}
+										children="Lucius"
+									/>
+								</SidebarMenuSubItem>
 							</SidebarMenuSub>
 						</CollapsibleContent>
 					</Collapsible>
-				))}
-			</SidebarMenu>
-		</SidebarGroup>
+				</SidebarMenu>
+			</SidebarGroup>
+			<SidebarGroup>
+				<SidebarGroupLabel>Learn</SidebarGroupLabel>
+				<SidebarMenu>
+					<SidebarMenuItem>
+						<SidebarMenuButton render={<Link to="/" />} children="Onslaught" />
+					</SidebarMenuItem>
+					<SidebarMenuItem>
+						<SidebarMenuButton render={<Link to="/" />} children="Salvage Run" />
+					</SidebarMenuItem>
+					<SidebarMenuItem>
+						<SidebarMenuButton render={<Link to="/" />} children="Equipment" />
+					</SidebarMenuItem>
+					<SidebarMenuItem>
+						<SidebarMenuButton render={<Link to="/" />} children="Upgrades" />
+					</SidebarMenuItem>
+				</SidebarMenu>
+			</SidebarGroup>
+		</>
 	);
 }
