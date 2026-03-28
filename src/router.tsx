@@ -2,7 +2,8 @@ import { routeTree } from "#src/routeTree.gen.ts";
 import { Link, createRouter } from "@tanstack/react-router";
 import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
 
-import { QueryProvider, getContext } from "#src/2-integrations/convex-and-query.tsx";
+import { getContext } from "#src/2-integrations/convex-and-query-context.ts";
+import { QueryProvider } from "#src/2-integrations/convex-and-query.tsx";
 
 import { Button } from "#src/1-components/ui/button.tsx";
 

@@ -26,13 +26,54 @@
 	"rules": {
 		// TanStack Form passes children as a prop: https://tanstack.com/form/v1/docs/framework/react/guides/basic-concepts#field
 		"react/no-children-prop": "off",
+		// Project uses React 17+ new JSX transform (tsconfig jsx: react-jsx) — React need not be in scope
+		"react/react-in-jsx-scope": "off",
+		// Prefer inferred return types — explicit return types are less precise than what TS infers.
+		// No linter rule exists to enforce the opposite direction; this is a code review convention.
+		"typescript/explicit-function-return-type": "off",
+		"typescript/explicit-module-boundary-types": "off",
+		// Prefer function declarations or arrow functions; ban the `const foo = function() {}` form
+		"func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+		// This is a TypeScript project — .tsx is the correct extension for JSX files
+		"react/jsx-filename-extension": ["error", { "extensions": [".jsx", ".tsx"] }],
 		// oxfmt owns import ordering (perfectionist algorithm) — these conflict with it
 		"sort-imports": "off",
 		"import/order": "off",
 		// oxfmt keeps `import type` as a separate declaration from value imports
-		"no-duplicate-imports": ["error", { "allowSeparateTypeImports": true }]
+		"no-duplicate-imports": ["error", { "allowSeparateTypeImports": true }],
+		// we don't need to keep compatibility with old environments
+		"oxc/no-optional-chaining": "off",
+		"oxc/no-async-await": "off",
+		"oxc/no-rest-spread-properties": "off",
+		// Allow magic numbers that are obvious (e.g. array.length === 1) or self-documented (e.g. foo(bar=3))
+		"no-magic-numbers": [
+			"error",
+			{
+				"ignore": [0, 1],
+				"ignoreDefaultValues": true,
+				"ignoreNumericLiteralTypes": true
+			}
+		],
+		// Vite's Fast Refresh supports exporting primitive constants alongside components
+		"react/only-export-components": ["error", { "allowConstantExport": true }],
+		// Prefer named exports — default exports hurt refactoring and auto-import accuracy
+		"import/no-named-export": "off",
+		"import/no-default-export": "error",
+		"import/prefer-default-export": "off",
+		// Ternaries are fine for simple constructs
+		"no-ternary": "off",
+		"react/jsx-max-depth": ["error", { "max": 4 }]
 	},
 	"overrides": [
+		{
+			// These tool config files require a default export by their respective framework contracts
+			// and legitimately import Node.js builtins (e.g. node:url for path resolution)
+			"files": ["vite.config.ts", "vitest.config.ts", "eslint.config.js", "convex/schema.js"],
+			"rules": {
+				"import/no-default-export": "off",
+				"import/no-nodejs-modules": "off"
+			}
+		},
 		{
 			"files": ["**/*.test.ts", "**/*.test.tsx", "**/test-setup.tsx"],
 			"plugins": [
@@ -47,6 +88,27 @@
 			],
 			"env": {
 				"jest": true
+			}
+		},
+		{
+			// TanStack Router convention: `export const Route` appears near the top of the file,
+			// and the `Page` component is defined below it (used by Route before its declaration).
+			"files": ["**/src/0-routes/**/*.tsx"],
+			"rules": {
+				"import/exports-last": "off",
+				"no-use-before-define": "off"
+			}
+		},
+		{
+			// shadcn/ui components get a pass on a lot of rules since we're not doing much maintenance on them
+			"files": ["**/src/1-components/ui/**"],
+			"rules": {
+				"react/no-multi-comp": "off",
+				"oxc/no-rest-spread-properties": "off",
+				// shadcn/ui forwards props to underlying DOM elements via {...props} spreading
+				"react/jsx-props-no-spreading": "off",
+				// shadcn/ui intentionally exports non-component values (e.g. buttonVariants, useSidebar) alongside components
+				"react/only-export-components": "off"
 			}
 		}
 	]

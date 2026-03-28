@@ -14,20 +14,20 @@ export function DemoForm() {
 	const form = useAppForm({
 		defaultValues: {
 			email: "",
-			userName: "",
 			isHuman: false,
+			userName: "",
 		},
 		onSubmit: async ({ value }) => {
 			toast("You submitted the following values:", {
+				classNames: {
+					content: "flex flex-col gap-2",
+				},
 				description: (
 					<pre className="mt-2 w-80 overflow-x-auto rounded-md p-4">
 						<code>{JSON.stringify(value, null, 2)}</code>
 					</pre>
 				),
 				position: "bottom-right",
-				classNames: {
-					content: "flex flex-col gap-2",
-				},
 				style: {
 					"--border-radius": "calc(var(--radius)  + 4px)",
 				} as CSSProperties,

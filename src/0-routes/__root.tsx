@@ -8,7 +8,7 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import type { ReactNode } from "react";
 import { Toaster } from "sonner";
 
-import { getContext } from "#src/2-integrations/convex-and-query.tsx";
+import { getContext } from "#src/2-integrations/convex-and-query-context.ts";
 
 import { AppLayout } from "#src/1-components/app/app-layout.tsx";
 import { TooltipProvider } from "#src/1-components/ui/tooltip.tsx";
@@ -24,17 +24,17 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 	head: () => ({
 		links: [
 			{
-				rel: "stylesheet",
 				href: appCss,
+				rel: "stylesheet",
 			},
 		],
 		meta: [
 			{
-				charSet: "utf-8",
+				charSet: "utf8",
 			},
 			{
-				name: "viewport",
 				content: "width=device-width, initial-scale=1",
+				name: "viewport",
 			},
 			{
 				title: "TP2 Reset",
