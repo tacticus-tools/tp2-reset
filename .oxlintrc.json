@@ -25,7 +25,10 @@
 	],
 	"rules": {
 		// TanStack Form passes children as a prop: https://tanstack.com/form/v1/docs/framework/react/guides/basic-concepts#field
-		"react/no-children-prop": "off"
+		"react/no-children-prop": "off",
+		// oxfmt owns import ordering (perfectionist algorithm) — these conflict with it
+		"sort-imports": "off",
+		"import/order": "off"
 	},
 	"overrides": [
 		{
