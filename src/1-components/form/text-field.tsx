@@ -16,9 +16,7 @@ export function TextField({
 
 	return (
 		<Field>
-			<FieldLabel htmlFor={field.name}>
-				{labelOverride ?? field.name}
-			</FieldLabel>
+			<FieldLabel htmlFor={field.name}>{labelOverride ?? field.name}</FieldLabel>
 			<Input
 				id={field.name}
 				autoComplete="off"

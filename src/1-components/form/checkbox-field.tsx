@@ -3,15 +3,12 @@ import { FieldDescription, FieldLabel } from "../ui/field.tsx";
 import { FieldErrors } from "./field-errors.tsx";
 import { useFieldContext } from "./form-context.ts";
 
-type CheckboxFieldProps = {
+interface CheckboxFieldProps {
 	labelOverride: string;
 	description?: string;
-};
+}
 
-export const CheckboxField = ({
-	labelOverride,
-	description,
-}: CheckboxFieldProps) => {
+export const CheckboxField = ({ labelOverride, description }: CheckboxFieldProps) => {
 	const field = useFieldContext<boolean>();
 
 	return (
@@ -24,9 +21,7 @@ export const CheckboxField = ({
 				}}
 				onBlur={field.handleBlur}
 			/>
-			<FieldLabel htmlFor={field.name}>
-				{labelOverride ?? field.name}
-			</FieldLabel>
+			<FieldLabel htmlFor={field.name}>{labelOverride ?? field.name}</FieldLabel>
 			<FieldDescription>{description}</FieldDescription>
 			<FieldErrors meta={field.state.meta} />
 		</>

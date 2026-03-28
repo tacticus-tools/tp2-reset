@@ -1,0 +1,41 @@
+{
+	"$schema": "./node_modules/oxfmt/configuration_schema.json",
+	"useTabs": true,
+	"singleQuote": false,
+	"ignorePatterns": [
+		"src/routeTree.gen.ts",
+		"src/styles.css",
+		"convex/_generated/**",
+		"dist/**",
+		"**/*.generated.json",
+		"**/*.generated.ts",
+		"src/5-assets/legacy-json/**",
+		"data.raw.json"
+	],
+	"sortImports": {
+		"internalPattern": ["#*", "#*/**"],
+		"customGroups": [
+			{ "groupName": "common", "elementNamePattern": ["#common/**"] },
+			{ "groupName": "convex", "elementNamePattern": ["#convex/**"] },
+			{ "groupName": "src-5", "elementNamePattern": ["#src/5-*/**"] },
+			{ "groupName": "src-4", "elementNamePattern": ["#src/4-*/**"] },
+			{ "groupName": "src-3", "elementNamePattern": ["#src/3-*/**"] },
+			{ "groupName": "src-2", "elementNamePattern": ["#src/2-*/**"] },
+			{ "groupName": "src-1", "elementNamePattern": ["#src/1-*/**"] },
+			{ "groupName": "src-0", "elementNamePattern": ["#src/0-*/**"] }
+		],
+		"groups": [
+			"builtin",
+			"external",
+			"common",
+			"convex",
+			"src-5",
+			"src-4",
+			"src-3",
+			"src-2",
+			"src-1",
+			"src-0",
+			"unknown"
+		]
+	}
+}

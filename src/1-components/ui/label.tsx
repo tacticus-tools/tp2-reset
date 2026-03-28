@@ -4,7 +4,6 @@ import { cn } from "#src/4-lib/shadcn/utils.ts";
 
 function Label({ className, ...props }: ComponentProps<"label">) {
 	return (
-		// biome-ignore lint/a11y/noLabelWithoutControl: I'm trusting Shadcn on this one
 		<label
 			data-slot="label"
 			className={cn(

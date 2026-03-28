@@ -1,5 +1,4 @@
-// biome-ignore lint/correctness/noNodejsModules: server-side config file, false positive
-import { fileURLToPath, URL } from "node:url";
+import { URL, fileURLToPath } from "node:url";
 
 import { cloudflare } from "@cloudflare/vite-plugin";
 import babel from "@rolldown/plugin-babel";
@@ -11,20 +10,6 @@ import { defineConfig } from "vite";
 import viteTsConfigPaths from "vite-tsconfig-paths";
 
 const config = defineConfig({
-	resolve: {
-		alias: {
-			"#common": fileURLToPath(new URL("./common", import.meta.url)),
-			"#src": fileURLToPath(new URL("./src", import.meta.url)),
-			"#convex": fileURLToPath(new URL("./convex", import.meta.url)),
-		},
-	},
-	ssr: {
-		// @convex-dev/auth/react has a "use client" directive that the
-		// Cloudflare Workers SSR environment misinterprets as an RSC boundary,
-		// producing a client-reference stub that never resolves and hangs the Worker.
-		// Bundling it inline skips that boundary processing.
-		noExternal: ["@convex-dev/auth"],
-	},
 	plugins: [
 		devtools(),
 		cloudflare({ viteEnvironment: { name: "ssr" } }),
@@ -43,6 +28,20 @@ const config = defineConfig({
 			presets: [reactCompilerPreset()],
 		}),
 	],
+	resolve: {
+		alias: {
+			"#common": fileURLToPath(new URL("./common", import.meta.url)),
+			"#src": fileURLToPath(new URL("./src", import.meta.url)),
+			"#convex": fileURLToPath(new URL("./convex", import.meta.url)),
+		},
+	},
+	ssr: {
+		// @convex-dev/auth/react has a "use client" directive that the
+		// Cloudflare Workers SSR environment misinterprets as an RSC boundary,
+		// producing a client-reference stub that never resolves and hangs the Worker.
+		// Bundling it inline skips that boundary processing.
+		noExternal: ["@convex-dev/auth"],
+	},
 });
 
 export default config;

@@ -1,48 +1,47 @@
 {
 	"code_actions_on_format": {
-		"source.organizeImports.biome": true,
-		"source.fixAll.biome": true
+		"source.fixAll.oxc": true
 	},
 	"languages": {
 		"JavaScript": {
 			"formatter": {
 				"language_server": {
-					"name": "biome"
+					"name": "oxc"
 				}
 			}
 		},
 		"TypeScript": {
 			"formatter": {
 				"language_server": {
-					"name": "biome"
+					"name": "oxc"
 				}
 			}
 		},
 		"TSX": {
 			"formatter": {
 				"language_server": {
-					"name": "biome"
+					"name": "oxc"
 				}
 			}
 		},
 		"JSON": {
 			"formatter": {
 				"language_server": {
-					"name": "biome"
+					"name": "oxc"
 				}
 			}
 		},
 		"JSONC": {
 			"formatter": {
 				"language_server": {
-					"name": "biome"
+					"name": "oxc"
 				}
 			}
 		},
 		"CSS": {
 			"formatter": {
 				"language_server": {
-					"name": "biome"
+					"name": "oxc"
 				}
 			}
 		}

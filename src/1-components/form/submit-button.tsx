@@ -3,10 +3,10 @@ import { useStore } from "@tanstack/react-form";
 import { Button } from "../ui/button.tsx";
 import { useFormContext } from "./form-context.ts";
 
-type SubmitButtonProps = {
+interface SubmitButtonProps {
 	idleText?: string;
 	submittingText?: string;
-};
+}
 
 export const SubmitButton = ({
 	idleText = "Save",
@@ -20,11 +20,7 @@ export const SubmitButton = ({
 	]);
 
 	return (
-		<Button
-			type="submit"
-			disabled={isSubmitting || !canSubmit}
-			onClick={form.handleSubmit}
-		>
+		<Button type="submit" disabled={isSubmitting || !canSubmit} onClick={form.handleSubmit}>
 			{isSubmitting ? submittingText : idleText}
 		</Button>
 	);

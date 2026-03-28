@@ -1,12 +1,9 @@
+import appCss from "#src/styles.css?url";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { formDevtoolsPlugin } from "@tanstack/react-form-devtools";
 import type { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
-import {
-	createRootRouteWithContext,
-	HeadContent,
-	Scripts,
-} from "@tanstack/react-router";
+import { HeadContent, Scripts, createRootRouteWithContext } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import type { ReactNode } from "react";
 import { Toaster } from "sonner";
@@ -15,8 +12,6 @@ import { getContext } from "#src/2-integrations/convex-and-query.tsx";
 
 import { AppLayout } from "#src/1-components/app/app-layout.tsx";
 import { TooltipProvider } from "#src/1-components/ui/tooltip.tsx";
-
-import appCss from "#src/styles.css?url";
 
 interface MyRouterContext {
 	queryClient: QueryClient;
@@ -27,6 +22,12 @@ const { queryClient } = getContext();
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
 	head: () => ({
+		links: [
+			{
+				rel: "stylesheet",
+				href: appCss,
+			},
+		],
 		meta: [
 			{
 				charSet: "utf-8",
@@ -37,12 +38,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 			},
 			{
 				title: "TP2 Reset",
-			},
-		],
-		links: [
-			{
-				rel: "stylesheet",
-				href: appCss,
 			},
 		],
 	}),

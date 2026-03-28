@@ -12,11 +12,7 @@ import {
 
 import { useUserPreferencesStore } from "#src/3-hooks/use-user-preferences-store.ts";
 
-import {
-	Avatar,
-	AvatarFallback,
-	AvatarImage,
-} from "#src/1-components/ui/avatar.tsx";
+import { Avatar, AvatarFallback, AvatarImage } from "#src/1-components/ui/avatar.tsx";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -34,9 +30,9 @@ import {
 } from "#src/1-components/ui/sidebar.tsx";
 
 const THEME_OPTIONS = [
-	{ value: "light" as const, label: "Light", icon: SunIcon },
-	{ value: "dark" as const, label: "Dark", icon: MoonIcon },
-	{ value: "system" as const, label: "System", icon: MonitorIcon },
+	{ icon: SunIcon, label: "Light", value: "light" as const },
+	{ icon: MoonIcon, label: "Dark", value: "dark" as const },
+	{ icon: MonitorIcon, label: "System", value: "system" as const },
 ];
 
 export function NavUser({
@@ -56,9 +52,7 @@ export function NavUser({
 			<SidebarMenuItem>
 				<DropdownMenu>
 					<DropdownMenuTrigger
-						render={
-							<SidebarMenuButton size="lg" className="aria-expanded:bg-muted" />
-						}
+						render={<SidebarMenuButton size="lg" className="aria-expanded:bg-muted" />}
 					>
 						<Avatar>
 							<AvatarImage src={user.avatar} alt={user.name} />
@@ -103,9 +97,7 @@ export function NavUser({
 								>
 									<Icon className="size-4" />
 									{label}
-									{theme === value && (
-										<span className="ml-auto text-xs font-semibold">✓</span>
-									)}
+									{theme === value && <span className="ml-auto text-xs font-semibold">✓</span>}
 								</DropdownMenuItem>
 							))}
 						</DropdownMenuGroup>
