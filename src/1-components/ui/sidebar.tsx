@@ -2,11 +2,11 @@
 
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { cva } from 'class-variance-authority';
-import type { VariantProps } from 'class-variance-authority';
+import { cva } from "class-variance-authority";
+import type { VariantProps } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import type { CSSProperties, ComponentProps } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import type { CSSProperties, ComponentProps } from "react";
 
 import { cn } from "#src/4-lib/shadcn/utils.ts";
 
@@ -83,7 +83,10 @@ function SidebarProvider({
 	);
 
 	// Helper to toggle the sidebar.
-	const toggleSidebar = useCallback(() => isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open), [isMobile, setOpen]);
+	const toggleSidebar = useCallback(
+		() => (isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open)),
+		[isMobile, setOpen],
+	);
 
 	// Adds a keyboard shortcut to toggle the sidebar.
 	useEffect(() => {
@@ -457,20 +460,15 @@ const sidebarMenuButtonVariants = cva(
 			size: "default",
 			variant: "default",
 		},
-		variants: {
-			size: {
-				default: "h-8 text-sm",
-				sm: "h-7 text-xs",
-				lg: "h-12 text-sm group-data-[collapsible=icon]:p-0!",
-			},
-			variant: {
-				default: "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-				outline:
-					"bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]",
-			}default: "h-8 text-sm",
-				lg: "h-12 text-sm group-data-[collapsible=icon]:p-0!",
-				sm: "h-7 text-xs",
-			},
+		size: {
+			default: "h-8 text-sm",
+			lg: "h-12 text-sm group-data-[collapsible=icon]:p-0!",
+			sm: "h-7 text-xs",
+		},
+		variant: {
+			default: "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+			outline:
+				"bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]",
 		},
 	},
 );
