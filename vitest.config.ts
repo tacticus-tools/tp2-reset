@@ -1,7 +1,8 @@
 // biome-ignore lint/correctness/noNodejsModules: server-side config file, false positive
 import { fileURLToPath, URL } from "node:url";
 
-import viteReact from "@vitejs/plugin-react";
+import babel from "@rolldown/plugin-babel";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
 
 // ToDo: Keep an eye out for a better resolution to the "module is not defined" errors
@@ -17,10 +18,9 @@ export default defineConfig({
 		},
 	},
 	plugins: [
-		viteReact({
-			babel: {
-				plugins: ["babel-plugin-react-compiler"],
-			},
+		react(),
+		babel({
+			presets: [reactCompilerPreset()],
 		}),
 	],
 	test: {
