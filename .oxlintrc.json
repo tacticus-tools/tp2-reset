@@ -28,7 +28,9 @@
 		"react/no-children-prop": "off",
 		// oxfmt owns import ordering (perfectionist algorithm) — these conflict with it
 		"sort-imports": "off",
-		"import/order": "off"
+		"import/order": "off",
+		// oxfmt keeps `import type` as a separate declaration from value imports
+		"no-duplicate-imports": ["error", { "allowSeparateTypeImports": true }]
 	},
 	"overrides": [
 		{
