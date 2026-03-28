@@ -78,7 +78,7 @@
 		"eslint-plugin-jest-dom": "^5.5.0",
 		"eslint-plugin-testing-library": "^7.16.0",
 		"jsdom": "^29.0.0",
-		"knip": "^5.86.0",
+		"knip": "^6.0.0",
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.56.1",
 		"vite": "^7.3.1",
