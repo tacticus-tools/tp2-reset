@@ -44,6 +44,8 @@ export function NavMain() {
 										render={<Link to="/plan/lre/trajann" />}
 										children="Trajann"
 									/>
+								</SidebarMenuSubItem>
+								<SidebarMenuSubItem>
 									<SidebarMenuSubButton
 										render={<Link to="/plan/lre/lucius" />}
 										children="Lucius"
