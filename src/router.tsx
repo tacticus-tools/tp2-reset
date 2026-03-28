@@ -18,13 +18,13 @@ export const getRouter = () => {
 		defaultStructuralSharing: true,
 		defaultPreloadStaleTime: 0,
 		defaultNotFoundComponent: () => (
-				<div>
-					<p>Not found!</p>
-					<Button>
-						<Link to="/">Go home</Link>
-					</Button>
-				</div>
-			),
+			<div>
+				<p>Not found!</p>
+				<Button>
+					<Link to="/">Go home</Link>
+				</Button>
+			</div>
+		),
 	});
 
 	setupRouterSsrQueryIntegration({

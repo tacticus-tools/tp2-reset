@@ -7,4 +7,5 @@ interface FieldErrorsProps {
 	meta: AnyFieldMeta;
 }
 
-export const FieldErrors = ({ meta }: FieldErrorsProps) => meta.isTouched && <FieldError errors={meta.errors as ZodError[]} />;
+export const FieldErrors = ({ meta }: FieldErrorsProps) =>
+	meta.isTouched && <FieldError errors={meta.errors as ZodError[]} />;
