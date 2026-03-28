@@ -25,14 +25,8 @@ export function NavMain() {
 			<SidebarGroup>
 				<SidebarGroupLabel>Plan</SidebarGroupLabel>
 				<SidebarMenu>
-					<Collapsible
-						defaultOpen
-						className="group/collapsible"
-						render={<SidebarMenuItem />}
-					>
-						<CollapsibleTrigger
-							render={<SidebarMenuButton tooltip="Legendary Release Events" />}
-						>
+					<Collapsible defaultOpen className="group/collapsible" render={<SidebarMenuItem />}>
+						<CollapsibleTrigger render={<SidebarMenuButton tooltip="Legendary Release Events" />}>
 							<Sword />
 							<span>Legendary Release Events</span>
 							<ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-open/collapsible:rotate-90" />
@@ -46,10 +40,7 @@ export function NavMain() {
 									/>
 								</SidebarMenuSubItem>
 								<SidebarMenuSubItem>
-									<SidebarMenuSubButton
-										render={<Link to="/plan/lre/lucius" />}
-										children="Lucius"
-									/>
+									<SidebarMenuSubButton render={<Link to="/plan/lre/lucius" />} children="Lucius" />
 								</SidebarMenuSubItem>
 							</SidebarMenuSub>
 						</CollapsibleContent>
@@ -63,10 +54,7 @@ export function NavMain() {
 						<SidebarMenuButton render={<Link to="/" />} children="Onslaught" />
 					</SidebarMenuItem>
 					<SidebarMenuItem>
-						<SidebarMenuButton
-							render={<Link to="/" />}
-							children="Salvage Run"
-						/>
+						<SidebarMenuButton render={<Link to="/" />} children="Salvage Run" />
 					</SidebarMenuItem>
 					<SidebarMenuItem>
 						<SidebarMenuButton render={<Link to="/" />} children="Equipment" />

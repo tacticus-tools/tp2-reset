@@ -1,6 +1,7 @@
 "use client";
 
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva } from 'class-variance-authority';
+import type { VariantProps } from 'class-variance-authority';
 import type { ComponentProps } from "react";
 
 import { cn } from "#src/4-lib/shadcn/utils.ts";
@@ -11,7 +12,6 @@ import { Textarea } from "#src/1-components/ui/textarea.tsx";
 
 function InputGroup({ className, ...props }: ComponentProps<"div">) {
 	return (
-		// biome-ignore lint/a11y/useSemanticElements: I'm trusting Shadcn on this one
 		<div
 			data-slot="input-group"
 			role="group"
@@ -27,20 +27,18 @@ function InputGroup({ className, ...props }: ComponentProps<"div">) {
 const inputGroupAddonVariants = cva(
 	"flex h-auto cursor-text items-center justify-center gap-2 py-1.5 text-sm font-medium text-muted-foreground select-none group-data-[disabled=true]/input-group:opacity-50 [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4",
 	{
+		defaultVariants: {
+			align: "inline-start",
+		},
 		variants: {
 			align: {
-				"inline-start":
-					"order-first pl-2 has-[>button]:ml-[-0.3rem] has-[>kbd]:ml-[-0.15rem]",
-				"inline-end":
-					"order-last pr-2 has-[>button]:mr-[-0.3rem] has-[>kbd]:mr-[-0.15rem]",
+				"inline-start": "order-first pl-2 has-[>button]:ml-[-0.3rem] has-[>kbd]:ml-[-0.15rem]",
+				"inline-end": "order-last pr-2 has-[>button]:mr-[-0.3rem] has-[>kbd]:mr-[-0.15rem]",
 				"block-start":
 					"order-first w-full justify-start px-2.5 pt-2 group-has-[>input]/input-group:pt-2 [.border-b]:pb-2",
 				"block-end":
 					"order-last w-full justify-start px-2.5 pb-2 group-has-[>input]/input-group:pb-2 [.border-t]:pt-2",
 			},
-		},
-		defaultVariants: {
-			align: "inline-start",
 		},
 	},
 );
@@ -51,9 +49,6 @@ function InputGroupAddon({
 	...props
 }: ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>) {
 	return (
-		// biome-ignore lint/a11y/noNoninteractiveElementInteractions: I'm trusting Shadcn on this one
-		// biome-ignore lint/a11y/useKeyWithClickEvents: I'm trusting Shadcn on this one
-		// biome-ignore lint/a11y/useSemanticElements: I'm trusting Shadcn on this one
 		<div
 			role="group"
 			data-slot="input-group-addon"
@@ -70,23 +65,19 @@ function InputGroupAddon({
 	);
 }
 
-const inputGroupButtonVariants = cva(
-	"flex items-center gap-2 text-sm shadow-none",
-	{
-		variants: {
-			size: {
-				xs: "h-6 gap-1 rounded-[calc(var(--radius)-3px)] px-1.5 [&>svg:not([class*='size-'])]:size-3.5",
-				sm: "",
-				"icon-xs":
-					"size-6 rounded-[calc(var(--radius)-3px)] p-0 has-[>svg]:p-0",
-				"icon-sm": "size-8 p-0 has-[>svg]:p-0",
-			},
-		},
-		defaultVariants: {
-			size: "xs",
+const inputGroupButtonVariants = cva("flex items-center gap-2 text-sm shadow-none", {
+	defaultVariants: {
+		size: "xs",
+	},
+	variants: {
+		size: {
+			xs: "h-6 gap-1 rounded-[calc(var(--radius)-3px)] px-1.5 [&>svg:not([class*='size-'])]:size-3.5",
+			sm: "",
+			"icon-xs": "size-6 rounded-[calc(var(--radius)-3px)] p-0 has-[>svg]:p-0",
+			"icon-sm": "size-8 p-0 has-[>svg]:p-0",
 		},
 	},
-);
+});
 
 function InputGroupButton({
 	className,
@@ -134,10 +125,7 @@ function InputGroupInput({ className, ...props }: ComponentProps<"input">) {
 	);
 }
 
-function InputGroupTextarea({
-	className,
-	...props
-}: ComponentProps<"textarea">) {
+function InputGroupTextarea({ className, ...props }: ComponentProps<"textarea">) {
 	return (
 		<Textarea
 			data-slot="input-group-control"

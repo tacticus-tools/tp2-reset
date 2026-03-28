@@ -5,9 +5,9 @@ import { z } from "zod";
 import { useAppForm } from "#src/1-components/form/index.ts";
 
 const formSchema = z.object({
-	userName: z.string().min(2, "First name must be at least 2 characters"),
 	email: z.email("Invalid email address"),
 	isHuman: z.literal(true),
+	userName: z.string().min(2, "First name must be at least 2 characters"),
 });
 
 export function DemoForm() {
@@ -16,9 +16,6 @@ export function DemoForm() {
 			email: "",
 			userName: "",
 			isHuman: false,
-		},
-		validators: {
-			onChange: formSchema,
 		},
 		onSubmit: async ({ value }) => {
 			toast("You submitted the following values:", {
@@ -36,6 +33,9 @@ export function DemoForm() {
 				} as CSSProperties,
 			});
 		},
+		validators: {
+			onChange: formSchema,
+		},
 	});
 
 	return (
@@ -44,15 +44,10 @@ export function DemoForm() {
 				name="userName"
 				children={(field) => <field.TextField labelOverride="User Name" />}
 			/>
-			<form.AppField
-				name="email"
-				children={(field) => <field.TextField labelOverride="Email" />}
-			/>
+			<form.AppField name="email" children={(field) => <field.TextField labelOverride="Email" />} />
 			<form.AppField
 				name="isHuman"
-				children={(field) => (
-					<field.CheckboxField labelOverride="I am a human" />
-				)}
+				children={(field) => <field.CheckboxField labelOverride="I am a human" />}
 			/>
 			<form.SubmitButton />
 		</form.AppForm>

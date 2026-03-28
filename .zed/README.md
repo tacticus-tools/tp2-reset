@@ -2,5 +2,5 @@
 
 ## Recommended Extensions
 
-- Biome: https://zed.dev/extensions/biome
+- OXC (OxLint + OxFmt): https://zed.dev/extensions/oxc
 - Github Actions: https://zed.dev/extensions/github-actions

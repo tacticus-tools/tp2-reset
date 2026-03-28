@@ -1,6 +1,7 @@
 # Assets Pipeline
 
 This directory contains 2 classes of assets:
+
 1. Static assets (images, logos, UI elements)
 2. Datamined game data and the build-time transformations that validate, normalize, and optimize it for use in the app.
 
@@ -13,6 +14,7 @@ This directory contains 2 classes of assets:
 - Datamined JSON often references these files, so we want to keep their original directory structure intact.
 
 ## `images/`
+
 - General-purpose images (logos, UI assets) that we create.
 - Vite tip: use `import` or `import.meta.glob` to reference these in code, which processes them through Vite's asset optimization pipelines.
 
@@ -48,6 +50,7 @@ When you run `bun build` (or `bun dev`), the following happens:
 7. App code imports the generated files and assumes they're valid
 
 ### Benefits of this approach:
+
 - **Early error detection**: Catches issues with datamined data immediately during development
 - **Flexibility**: Changes to the raw data format can be compensated for in the transformation step without affecting app code
 - **Type safety**: Ensures all data conforms to expected types, reducing runtime errors
@@ -63,15 +66,15 @@ When you run `bun build` (or `bun dev`), the following happens:
    - Define schemas with validation rules
    - Export a `main()` function that reads raw, validates, and writes generated files
 4. Register in `vite.config.ts`:
+
    ```ts
    import { main as prepareYourAssetData } from "./src/5-assets/your-asset/generate-data.ts";
-   
+
    export default defineConfig({
-     plugins: [
-       { name: "prepareYourAssetData", buildStart: prepareYourAssetData },
-     ],
+   	plugins: [{ name: "prepareYourAssetData", buildStart: prepareYourAssetData }],
    });
    ```
+
 5. Run `bun build` to test the pipeline and ensure generated files are created without errors
 6. Create public API: `index.ts`
    - Import generated data
@@ -87,6 +90,7 @@ bun run ./src/5-assets/legacy-json/compare-with-active-pipelines.ts
 ```
 
 ### What it does:
+
 - Scans all JSON files in `legacy-json/data/` and `legacy-json/fsd/`
 - Scans all `*.raw.json` files in active asset pipelines
 - Computes SHA256 hashes to identify exact matches
@@ -94,6 +98,7 @@ bun run ./src/5-assets/legacy-json/compare-with-active-pipelines.ts
 - Lists unmatched files on both sides
 
 ### Interpreting results:
+
 - **Matches**: Legacy file is identical to an active raw file (safe to delete the legacy file if desired)
 - **Unmatched legacy**: File is either outdated or represents data that hasn't been migrated yet (e.g., LRE character data, old i18n files)
 - **Unmatched active**: Asset pipeline was created after legacy files were archived (no legacy equivalent exists)

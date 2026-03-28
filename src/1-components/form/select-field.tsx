@@ -1,40 +1,27 @@
 import { Label } from "../ui/label.tsx";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "../ui/select.tsx";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select.tsx";
 import { FieldErrors } from "./field-errors.tsx";
 import { useFieldContext } from "./form-context.ts";
 
-type SelectOption = {
+interface SelectOption {
 	value: string;
 	label: string;
-};
+}
 
-type SelectFieldProps = {
+interface SelectFieldProps {
 	label: string;
 	options: SelectOption[];
 	placeholder?: string;
-};
+}
 
-export const SelectField = ({
-	label,
-	options,
-	placeholder,
-}: SelectFieldProps) => {
+export const SelectField = ({ label, options, placeholder }: SelectFieldProps) => {
 	const field = useFieldContext<string | null>();
 
 	return (
 		<div className="space-y-2">
 			<div className="space-y-1">
 				<Label htmlFor={field.name}>{label}</Label>
-				<Select
-					value={field.state.value}
-					onValueChange={(value) => field.handleChange(value)}
-				>
+				<Select value={field.state.value} onValueChange={(value) => field.handleChange(value)}>
 					<SelectTrigger id={field.name} onBlur={field.handleBlur}>
 						<SelectValue placeholder={placeholder} />
 					</SelectTrigger>

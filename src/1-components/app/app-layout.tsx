@@ -1,9 +1,6 @@
 import { AppSidebar } from "#src/1-components/app/sidebar/index.tsx";
 import { SiteHeader } from "#src/1-components/app/site-header.tsx";
-import {
-	SidebarInset,
-	SidebarProvider,
-} from "#src/1-components/ui/sidebar.tsx";
+import { SidebarInset, SidebarProvider } from "#src/1-components/ui/sidebar.tsx";
 
 export function AppLayout({ children }: React.PropsWithChildren) {
 	return (

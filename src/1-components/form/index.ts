@@ -7,14 +7,14 @@ import { SubmitButton } from "./submit-button.tsx";
 import { TextField } from "./text-field.tsx";
 
 export const { useAppForm } = createFormHook({
-	fieldContext,
-	formContext,
-	formComponents: {
-		SubmitButton,
-	},
 	fieldComponents: {
 		TextField,
 		SelectField,
 		CheckboxField,
 	},
+	fieldContext,
+	formComponents: {
+		SubmitButton,
+	},
+	formContext,
 });

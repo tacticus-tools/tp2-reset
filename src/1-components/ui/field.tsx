@@ -1,4 +1,5 @@
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva } from 'class-variance-authority';
+import type { VariantProps } from 'class-variance-authority';
 import type { ComponentProps, ReactNode } from "react";
 import { useMemo } from "react";
 
@@ -51,23 +52,20 @@ function FieldGroup({ className, ...props }: ComponentProps<"div">) {
 	);
 }
 
-const fieldVariants = cva(
-	"group/field flex w-full gap-2 data-[invalid=true]:text-destructive",
-	{
-		variants: {
-			orientation: {
-				vertical: "flex-col *:w-full [&>.sr-only]:w-auto",
-				horizontal:
-					"flex-row items-center has-[>[data-slot=field-content]]:items-start *:data-[slot=field-label]:flex-auto has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
-				responsive:
-					"flex-col *:w-full @md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto @md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:*:data-[slot=field-label]:flex-auto [&>.sr-only]:w-auto @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
-			},
-		},
-		defaultVariants: {
-			orientation: "vertical",
+const fieldVariants = cva("group/field flex w-full gap-2 data-[invalid=true]:text-destructive", {
+	defaultVariants: {
+		orientation: "vertical",
+	},
+	variants: {
+		orientation: {
+			vertical: "flex-col *:w-full [&>.sr-only]:w-auto",
+			horizontal:
+				"flex-row items-center has-[>[data-slot=field-content]]:items-start *:data-[slot=field-label]:flex-auto has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
+			responsive:
+				"flex-col *:w-full @md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto @md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:*:data-[slot=field-label]:flex-auto [&>.sr-only]:w-auto @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
 		},
 	},
-);
+});
 
 function Field({
 	className,
@@ -75,7 +73,6 @@ function Field({
 	...props
 }: ComponentProps<"div"> & VariantProps<typeof fieldVariants>) {
 	return (
-		// biome-ignore lint/a11y/useSemanticElements: I'm trusting Shadcn on this one
 		<div
 			role="group"
 			data-slot="field"
@@ -90,10 +87,7 @@ function FieldContent({ className, ...props }: ComponentProps<"div">) {
 	return (
 		<div
 			data-slot="field-content"
-			className={cn(
-				"group/field-content flex flex-1 flex-col gap-0.5 leading-snug",
-				className,
-			)}
+			className={cn("group/field-content flex flex-1 flex-col gap-0.5 leading-snug", className)}
 			{...props}
 		/>
 	);
@@ -151,7 +145,7 @@ function FieldSeparator({
 	return (
 		<div
 			data-slot="field-separator"
-			data-content={!!children}
+			data-content={Boolean(children)}
 			className={cn(
 				"relative -my-2 h-5 text-sm group-data-[variant=outline]/field-group:-mb-2",
 				className,
@@ -177,7 +171,7 @@ function FieldError({
 	errors,
 	...props
 }: ComponentProps<"div"> & {
-	errors?: Array<{ message?: string } | undefined>;
+	errors?: ({ message?: string } | undefined)[];
 }) {
 	const content = useMemo(() => {
 		if (children) {
@@ -188,9 +182,7 @@ function FieldError({
 			return null;
 		}
 
-		const uniqueErrors = [
-			...new Map(errors.map((error) => [error?.message, error])).values(),
-		];
+		const uniqueErrors = [...new Map(errors.map((error) => [error?.message, error])).values()];
 
 		if (uniqueErrors?.length === 1) {
 			return uniqueErrors[0]?.message;
@@ -199,8 +191,7 @@ function FieldError({
 		return (
 			<ul className="ml-4 flex list-disc flex-col gap-1">
 				{uniqueErrors.map(
-					(error) =>
-						error?.message && <li key={error.message}>{error.message}</li>,
+					(error) => error?.message && <li key={error.message}>{error.message}</li>,
 				)}
 			</ul>
 		);

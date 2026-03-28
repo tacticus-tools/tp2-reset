@@ -1,0 +1,48 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"plugins": ["eslint", "typescript", "unicorn", "oxc", "react", "jsx-a11y", "import"],
+	"categories": {
+		"correctness": "error",
+		"suspicious": "error",
+		"perf": "error",
+		"style": "error",
+		"restriction": "error",
+		"pedantic": "warn",
+		"nursery": "off"
+	},
+	"env": {
+		"browser": true,
+		"es2022": true
+	},
+	"ignorePatterns": [
+		"**/convex/_generated/**",
+		"**/src/routeTree.gen.ts",
+		"**/dist/**",
+		"**/*.generated.ts",
+		"**/*.generated.json",
+		"**/src/5-assets/legacy-json/**",
+		"**/node_modules/**"
+	],
+	"rules": {
+		// TanStack Form passes children as a prop: https://tanstack.com/form/v1/docs/framework/react/guides/basic-concepts#field
+		"react/no-children-prop": "off"
+	},
+	"overrides": [
+		{
+			"files": ["**/*.test.ts", "**/*.test.tsx", "**/test-setup.tsx"],
+			"plugins": [
+				"eslint",
+				"typescript",
+				"unicorn",
+				"oxc",
+				"react",
+				"jsx-a11y",
+				"import",
+				"vitest"
+			],
+			"env": {
+				"jest": true
+			}
+		}
+	]
+}

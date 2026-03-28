@@ -15,8 +15,7 @@ function applyThemeToDOM(theme: Theme) {
 	const root = window.document.documentElement;
 	root.classList.remove("light", "dark");
 	if (theme === "system") {
-		const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-			.matches
+		const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
 			? "dark"
 			: "light";
 		root.classList.add(systemTheme);
@@ -28,18 +27,18 @@ function applyThemeToDOM(theme: Theme) {
 export const useUserPreferencesStore = create<UserPreferencesState>()(
 	persist(
 		(set) => ({
-			theme: "system",
+			setSidebarOpen: (state) => set({ sidebarOpen: state }),
 			setTheme: (theme) => {
 				applyThemeToDOM(theme);
 				set({ theme });
 			},
 			sidebarOpen: true,
-			setSidebarOpen: (state) => set({ sidebarOpen: state }),
+			theme: "system",
 		}),
 		{
 			name: "user-preferences-storage",
 			onRehydrateStorage: () => (state) => {
-				if (state?.theme) applyThemeToDOM(state.theme);
+				if (state?.theme) {applyThemeToDOM(state.theme);}
 			},
 		},
 	),
