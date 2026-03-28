@@ -6,7 +6,7 @@ import { cva } from 'class-variance-authority';
 import type { VariantProps } from 'class-variance-authority';
 import { PanelLeftIcon } from "lucide-react";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import type { ComponentProps, CSSProperties } from 'react';
+import type { CSSProperties, ComponentProps } from 'react';
 
 import { cn } from "#src/4-lib/shadcn/utils.ts";
 
@@ -454,19 +454,22 @@ const sidebarMenuButtonVariants = cva(
 	"peer/menu-button group/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-open:hover:bg-sidebar-accent data-open:hover:text-sidebar-accent-foreground data-active:bg-sidebar-accent data-active:font-medium data-active:text-sidebar-accent-foreground [&_svg]:size-4 [&_svg]:shrink-0 [&>span:last-child]:truncate",
 	{
 		defaultVariants: {
-			variant: "default",
 			size: "default",
+			variant: "default",
 		},
 		variants: {
-			variant: {
-				default: "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-				outline:
-					"bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]",
-			},
 			size: {
 				default: "h-8 text-sm",
 				sm: "h-7 text-xs",
 				lg: "h-12 text-sm group-data-[collapsible=icon]:p-0!",
+			},
+			variant: {
+				default: "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+				outline:
+					"bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]",
+			}default: "h-8 text-sm",
+				lg: "h-12 text-sm group-data-[collapsible=icon]:p-0!",
+				sm: "h-7 text-xs",
 			},
 		},
 	},

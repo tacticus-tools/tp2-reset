@@ -38,7 +38,9 @@ export const useUserPreferencesStore = create<UserPreferencesState>()(
 		{
 			name: "user-preferences-storage",
 			onRehydrateStorage: () => (state) => {
-				if (state?.theme) {applyThemeToDOM(state.theme);}
+				if (state?.theme) {
+					applyThemeToDOM(state.theme);
+				}
 			},
 		},
 	),
