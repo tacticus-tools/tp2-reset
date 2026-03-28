@@ -13,15 +13,15 @@ const config = defineConfig({
 	plugins: [
 		devtools(),
 		cloudflare({ viteEnvironment: { name: "ssr" } }),
-		// this is the plugin that enables path aliases
+		// This is the plugin that enables path aliases
 		viteTsConfigPaths({
 			projects: ["./tsconfig.json"],
 		}),
 		tailwindcss(),
 		tanstackStart({
 			prerender: { enabled: true },
-			spa: { enabled: true },
 			router: { routesDirectory: "0-routes" },
+			spa: { enabled: true },
 		}),
 		react(),
 		babel({
@@ -30,16 +30,17 @@ const config = defineConfig({
 	],
 	resolve: {
 		alias: {
-			"#common": fileURLToPath(new URL("./common", import.meta.url)),
-			"#src": fileURLToPath(new URL("./src", import.meta.url)),
-			"#convex": fileURLToPath(new URL("./convex", import.meta.url)),
+			"#common": fileURLToPath(new URL("common", import.meta.url)),
+			"#convex": fileURLToPath(new URL("convex", import.meta.url)),
+			"#src": fileURLToPath(new URL("src", import.meta.url)),
 		},
 	},
 	ssr: {
-		// @convex-dev/auth/react has a "use client" directive that the
-		// Cloudflare Workers SSR environment misinterprets as an RSC boundary,
-		// producing a client-reference stub that never resolves and hangs the Worker.
-		// Bundling it inline skips that boundary processing.
+		/* @convex-dev/auth/react has a "use client" directive that the
+		 * Cloudflare Workers SSR environment misinterprets as an RSC boundary,
+		 *   producing a client-reference stub that never resolves and hangs the Worker.
+		 * Bundling it inline skips that boundary processing.
+		 */
 		noExternal: ["@convex-dev/auth"],
 	},
 });

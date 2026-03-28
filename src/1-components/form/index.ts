@@ -8,9 +8,9 @@ import { TextField } from "./text-field.tsx";
 
 export const { useAppForm } = createFormHook({
 	fieldComponents: {
-		TextField,
-		SelectField,
 		CheckboxField,
+		SelectField,
+		TextField,
 	},
 	fieldContext,
 	formComponents: {

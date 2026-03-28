@@ -1,6 +1,8 @@
+"use client";
+
 import { Separator as SeparatorPrimitive } from "@base-ui/react/separator";
 
-import { cn } from "#src/4-lib/shadcn/utils.ts";
+import { cn } from "#src/4-lib/shadcn/utils";
 
 function Separator({ className, orientation = "horizontal", ...props }: SeparatorPrimitive.Props) {
 	return (

@@ -10,8 +10,8 @@ export const add = mutation({
 	args: { text: v.string() },
 	handler: async (ctx, args) =>
 		await ctx.db.insert("todos", {
-			text: args.text,
 			completed: false,
+			text: args.text,
 		}),
 });
 export const toggle = mutation({
