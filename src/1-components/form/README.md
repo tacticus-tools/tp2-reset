@@ -1,6 +1,6 @@
 # Form Components
 
-- The shadcn/ui form components are logic-agnostic, meaning they don't automically hook into any form libary
+- The shadcn/ui form components are logic-agnostic, meaning they don't automatically hook into any form library
 - The components in here bridge the gap between the styling of shadcn/ui components and the behaviour of TanStack Form.
 - You should not be styling much in these components. These are just for connecting the dots between the two libraries.
 
