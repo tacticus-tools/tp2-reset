@@ -1,5 +1,3 @@
-import { URL, fileURLToPath } from "node:url";
-
 import { cloudflare } from "@cloudflare/vite-plugin";
 import babel from "@rolldown/plugin-babel";
 import tailwindcss from "@tailwindcss/vite";
@@ -7,16 +5,12 @@ import { devtools } from "@tanstack/devtools-vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import viteTsConfigPaths from "vite-tsconfig-paths";
 
 const config = defineConfig({
 	plugins: [
 		devtools(),
 		cloudflare({ viteEnvironment: { name: "ssr" } }),
 		// This is the plugin that enables path aliases
-		viteTsConfigPaths({
-			projects: ["./tsconfig.json"],
-		}),
 		tailwindcss(),
 		tanstackStart({
 			prerender: { enabled: true },
@@ -28,13 +22,7 @@ const config = defineConfig({
 			presets: [reactCompilerPreset()],
 		}),
 	],
-	resolve: {
-		alias: {
-			"#common": fileURLToPath(new URL("common", import.meta.url)),
-			"#convex": fileURLToPath(new URL("convex", import.meta.url)),
-			"#src": fileURLToPath(new URL("src", import.meta.url)),
-		},
-	},
+	resolve: { tsconfigPaths: true },
 	ssr: {
 		/* @convex-dev/auth/react has a "use client" directive that the
 		 * Cloudflare Workers SSR environment misinterprets as an RSC boundary,

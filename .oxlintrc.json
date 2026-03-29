@@ -111,6 +111,6 @@
 				"import/exports-last": "off",
 				"no-use-before-define": "off"
 			}
-		},
+		}
 	]
 }
