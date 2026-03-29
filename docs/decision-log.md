@@ -190,7 +190,7 @@ See below for the template. Don't bother with date & author since git will handl
   - 1. Prettier + ESLint - The traditional choice, but requires a lot of configuration and can be slow.
   - 2. Biome - A newer tool that is designed to be a drop-in replacement for both Prettier and ESLint, but is much faster and has a lot of built-in rules that would normally require separate configuration. Written in Rust, by the way...
   - 3. Oxlint / Oxfmt - Similar to Biome and developed by the Vite team, but still in Alpha.
-- **Chosen solution**: Oxlint + Oxfmt + ESLint. While I like how Biome unifies everything to prevent the config conflicts in Prettier+EsLint, a kept running into major bugs. Oxlint/Oxfmt are co-developed to avoid config conflicts so it has similar benefits. While it is less mature, I think it has a better fundamental architecture and that is making it faster to develop and add plugins for. It doesn't have the specialty plugins ESLint does though, so we'll use it for formatting and basic linting, but we'll still use ESLint for specialty rules (like the Convex plugin).
+- **Chosen solution**: Oxlint + Oxfmt + ESLint. While I like how Biome unifies everything to prevent config conflicts in Prettier + ESLint, I kept running into major bugs. Oxlint/Oxfmt are co-developed to avoid config conflicts, so they provide similar benefits. While less mature, I think the fundamental architecture is stronger and enabling faster plugin development. It doesn't have the specialty plugins ESLint does, so we'll use it for formatting and basic linting, and keep ESLint for specialty rules (like the Convex plugin).
 
 <!-- TOC --><a name="decision-use-react-query-for-data-fetching-and-caching"></a>
 
