@@ -2,10 +2,10 @@ import { routeTree } from "#src/routeTree.gen.ts";
 import { Link, createRouter } from "@tanstack/react-router";
 import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
 
-import { getContext } from "#src/2-integrations/convex-and-query-context.ts";
-import { QueryProvider } from "#src/2-integrations/convex-and-query.tsx";
+import { getContext } from "#src/2_integrations/convex_and_query_context.ts";
+import { QueryProvider } from "#src/2_integrations/convex_and_query.tsx";
 
-import { Button } from "#src/1-components/ui/button.tsx";
+import { Button } from "#src/1_components/ui/button";
 
 export const getRouter = () => {
 	const rqContext = getContext();

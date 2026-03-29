@@ -24,8 +24,7 @@
 		"**/dist/**",
 		"**/*.generated.ts",
 		"**/*.generated.json",
-		"**/src/5-assets/legacy-json/**",
-		"**/src/1-components/ui/**", // shadcn provided and full of legacy support hacks
+		"**/src/1_components/ui/**", // shadcn provided and full of legacy support hacks
 		"**/node_modules/**",
 		"reset.d.ts"
 	],
@@ -66,13 +65,15 @@
 		"import/no-named-export": "off",
 		"import/no-default-export": "error",
 		"import/prefer-default-export": "off",
+		// Convex does not support kebab-case file names
+		"unicorn/filename-case": ["error", { "case": "snakeCase" }],
 		// Personal preferences
 		"no-ternary": "off",
 		"react/jsx-max-depth": ["error", { "max": 7 }], // a bit high but I don't want to push people into indirection
 		"curly": ["error", "multi-or-nest", "consistent"],
 		"no-inline-comments": "off",
 		"array-callback-return": ["error", { "allowImplicit": true }],
-		"id-length": ["error", { "exceptions": ["z"] }],
+		"id-length": ["error", { "exceptions": ["z"] }], // zod
 		"no-warning-comments": "off", // I use todo-tree tools
 		// Broken autocorrect - https://github.com/oxc-project/oxc/issues/20830
 		"sort-keys": "off"
@@ -81,14 +82,20 @@
 		{
 			// These tool config files require a default export by their respective framework contracts
 			// and legitimately import Node.js builtins (e.g. node:url for path resolution)
-			"files": ["vite.config.ts", "vitest.config.ts", "eslint.config.js", "convex/schema.js"],
+			"files": [
+				"vite.config.ts",
+				"vitest.config.ts",
+				"eslint.config.js",
+				"convex/schema.ts",
+				"convex/auth.config.ts"
+			],
 			"rules": {
 				"import/no-default-export": "off",
 				"import/no-nodejs-modules": "off"
 			}
 		},
 		{
-			"files": ["**/*.test.ts", "**/*.test.tsx", "**/test-setup.tsx"],
+			"files": ["**/*.test.ts", "**/*.test.tsx", "**/test_setup.tsx"],
 			"plugins": [
 				"eslint",
 				"typescript",
@@ -106,10 +113,16 @@
 		{
 			// TanStack Router convention: `export const Route` appears near the top of the file,
 			// and the `Page` component is defined below it (used by Route before its declaration).
-			"files": ["**/src/0-routes/**/*.tsx"],
+			"files": ["**/src/0_routes/**/*.tsx"],
 			"rules": {
 				"import/exports-last": "off",
 				"no-use-before-define": "off"
+			}
+		},
+		{
+			"files": ["**/convex/**"],
+			"rules": {
+				"id-length": ["error", { "exceptions": ["z", "q"] }] // zod, query
 			}
 		}
 	]

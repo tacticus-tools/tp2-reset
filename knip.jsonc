@@ -2,7 +2,7 @@
 	"$schema": "https://unpkg.com/knip@5/schema.json",
 	"tags": ["-lintignore"],
 	"ignore": [
-		"src/1-components/ui/**/*", // shadcn/ui components — keep all available
+		"src/1_components/ui/**/*", // shadcn/ui components — keep all available
 	],
 	"ignoreDependencies": [
 		"next-themes", // used by `sonner`

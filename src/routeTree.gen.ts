@@ -8,19 +8,25 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './0-routes/__root'
-import { Route as SettingsRouteImport } from './0-routes/settings'
-import { Route as PlanRouteRouteImport } from './0-routes/plan/route'
-import { Route as IndexRouteImport } from './0-routes/index'
-import { Route as PlanIndexRouteImport } from './0-routes/plan/index'
-import { Route as PlanLreRouteRouteImport } from './0-routes/plan/lre/route'
-import { Route as PlanLreIndexRouteImport } from './0-routes/plan/lre/index'
-import { Route as PlanLreTrajannRouteImport } from './0-routes/plan/lre/trajann'
-import { Route as PlanLreLuciusRouteImport } from './0-routes/plan/lre/lucius'
+import { Route as rootRouteImport } from './0_routes/__root'
+import { Route as SettingsRouteImport } from './0_routes/settings'
+import { Route as LoginRouteImport } from './0_routes/login'
+import { Route as PlanRouteRouteImport } from './0_routes/plan/route'
+import { Route as IndexRouteImport } from './0_routes/index'
+import { Route as PlanIndexRouteImport } from './0_routes/plan/index'
+import { Route as PlanLreRouteRouteImport } from './0_routes/plan/lre/route'
+import { Route as PlanLreIndexRouteImport } from './0_routes/plan/lre/index'
+import { Route as PlanLreTrajannRouteImport } from './0_routes/plan/lre/trajann'
+import { Route as PlanLreLuciusRouteImport } from './0_routes/plan/lre/lucius'
 
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlanRouteRoute = PlanRouteRouteImport.update({
@@ -62,6 +68,7 @@ const PlanLreLuciusRoute = PlanLreLuciusRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/plan': typeof PlanRouteRouteWithChildren
+  '/login': typeof LoginRoute
   '/settings': typeof SettingsRoute
   '/plan/lre': typeof PlanLreRouteRouteWithChildren
   '/plan/': typeof PlanIndexRoute
@@ -71,6 +78,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
   '/settings': typeof SettingsRoute
   '/plan': typeof PlanIndexRoute
   '/plan/lre/lucius': typeof PlanLreLuciusRoute
@@ -81,6 +89,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/plan': typeof PlanRouteRouteWithChildren
+  '/login': typeof LoginRoute
   '/settings': typeof SettingsRoute
   '/plan/lre': typeof PlanLreRouteRouteWithChildren
   '/plan/': typeof PlanIndexRoute
@@ -93,6 +102,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/plan'
+    | '/login'
     | '/settings'
     | '/plan/lre'
     | '/plan/'
@@ -102,6 +112,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/login'
     | '/settings'
     | '/plan'
     | '/plan/lre/lucius'
@@ -111,6 +122,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/plan'
+    | '/login'
     | '/settings'
     | '/plan/lre'
     | '/plan/'
@@ -122,6 +134,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PlanRouteRoute: typeof PlanRouteRouteWithChildren
+  LoginRoute: typeof LoginRoute
   SettingsRoute: typeof SettingsRoute
 }
 
@@ -132,6 +145,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/plan': {
@@ -219,6 +239,7 @@ const PlanRouteRouteWithChildren = PlanRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PlanRouteRoute: PlanRouteRouteWithChildren,
+  LoginRoute: LoginRoute,
   SettingsRoute: SettingsRoute,
 }
 export const routeTree = rootRouteImport

@@ -8,7 +8,8 @@
  * @module
  */
 
-import type * as todos from "../todos.js";
+import type * as auth from "../auth.js";
+import type * as user_settings from "../user_settings.js";
 
 import type {
   ApiFromModules,
@@ -17,7 +18,8 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
-  todos: typeof todos;
+  auth: typeof auth;
+  user_settings: typeof user_settings;
 }>;
 
 /**

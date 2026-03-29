@@ -1,15 +1,15 @@
+import { authTables } from "@convex-dev/auth/server";
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
-// oxlint-disable-next-line import/no-default-export
+const applicationTables = {
+	userSettings: defineTable({
+		userId: v.string(),
+		apiKey: v.string(),
+	}).index("by_userId", ["userId"]),
+};
+
 export default defineSchema({
-	products: defineTable({
-		imageId: v.string(),
-		price: v.number(),
-		title: v.string(),
-	}),
-	todos: defineTable({
-		completed: v.boolean(),
-		text: v.string(),
-	}),
+	...authTables,
+	...applicationTables,
 });

@@ -2,6 +2,11 @@
 	"name": "tp2-clean",
 	"private": false,
 	"type": "module",
+	"imports": {
+		"#src/*": "./src/*",
+		"#common/*": "./common/*",
+		"#convex/*": "./convex/*"
+	},
 	"scripts": {
 		"init": "bun install && npx convex dev --once --configure=new",
 		"dev:backend": "bun run convex dev",
@@ -25,6 +30,7 @@
 	"dependencies": {
 		"@base-ui/react": "^1.2.0",
 		"@cloudflare/vite-plugin": "^1.26.1",
+		"@convex-dev/auth": "^0.0.91",
 		"@convex-dev/react-query": "0.1.0",
 		"@fontsource-variable/inter": "^5.2.8",
 		"@t3-oss/env-core": "^0.13.10",
@@ -63,7 +69,7 @@
 		"@testing-library/jest-dom": "^6.9.1",
 		"@testing-library/react": "^16.3.2",
 		"@total-typescript/ts-reset": "^0.6.1",
-		"@types/node": "^25.3.5",
+		"@types/node": "^25.5.0",
 		"@types/react": "^19.2.14",
 		"@types/react-dom": "^19.2.3",
 		"@vitejs/plugin-react": "^6.0.0",
