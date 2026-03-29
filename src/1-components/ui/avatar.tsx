@@ -1,9 +1,7 @@
-"use client";
-
 import { Avatar as AvatarPrimitive } from "@base-ui/react/avatar";
-import type * as React from "react";
+import * as React from "react";
 
-import { cn } from "#src/4-lib/shadcn/utils.ts";
+import { cn } from "#src/4-lib/shadcn/utils";
 
 function Avatar({
 	className,
@@ -90,4 +88,4 @@ function AvatarGroupCount({ className, ...props }: React.ComponentProps<"div">) 
 	);
 }
 
-export { Avatar, AvatarBadge, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage };
+export { Avatar, AvatarImage, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarBadge };

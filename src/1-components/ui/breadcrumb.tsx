@@ -1,9 +1,9 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { ChevronRightIcon, MoreHorizontalIcon } from "lucide-react";
-import type * as React from "react";
+import * as React from "react";
 
-import { cn } from "#src/4-lib/shadcn/utils.ts";
+import { cn } from "#src/4-lib/shadcn/utils";
 
 function Breadcrumb({ className, ...props }: React.ComponentProps<"nav">) {
 	return (
@@ -54,7 +54,7 @@ function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
 	return (
 		<span
 			data-slot="breadcrumb-page"
-			// Role="link" // TODO: Replace this with a Tanstack Router Link Component
+			role="link"
 			aria-disabled="true"
 			aria-current="page"
 			className={cn("font-normal text-foreground", className)}
@@ -94,10 +94,10 @@ function BreadcrumbEllipsis({ className, ...props }: React.ComponentProps<"span"
 
 export {
 	Breadcrumb,
-	BreadcrumbEllipsis,
+	BreadcrumbList,
 	BreadcrumbItem,
 	BreadcrumbLink,
-	BreadcrumbList,
 	BreadcrumbPage,
 	BreadcrumbSeparator,
+	BreadcrumbEllipsis,
 };

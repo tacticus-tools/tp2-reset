@@ -1,21 +1,20 @@
-import { cva } from "class-variance-authority";
-import type { VariantProps } from "class-variance-authority";
-import type { ComponentProps } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 
-import { cn } from "#src/4-lib/shadcn/utils.ts";
+import { cn } from "#src/4-lib/shadcn/utils";
 
 const alertVariants = cva(
 	"group/alert relative grid w-full gap-0.5 rounded-lg border px-2.5 py-2 text-left text-sm has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pr-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2 *:[svg]:row-span-2 *:[svg]:translate-y-0.5 *:[svg]:text-current *:[svg:not([class*='size-'])]:size-4",
 	{
-		defaultVariants: {
-			variant: "default",
-		},
 		variants: {
 			variant: {
 				default: "bg-card text-card-foreground",
 				destructive:
 					"bg-card text-destructive *:data-[slot=alert-description]:text-destructive/90 *:[svg]:text-current",
 			},
+		},
+		defaultVariants: {
+			variant: "default",
 		},
 	},
 );
@@ -24,7 +23,7 @@ function Alert({
 	className,
 	variant,
 	...props
-}: ComponentProps<"div"> & VariantProps<typeof alertVariants>) {
+}: React.ComponentProps<"div"> & VariantProps<typeof alertVariants>) {
 	return (
 		<div
 			data-slot="alert"
@@ -35,7 +34,7 @@ function Alert({
 	);
 }
 
-function AlertTitle({ className, ...props }: ComponentProps<"div">) {
+function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
 	return (
 		<div
 			data-slot="alert-title"
@@ -48,7 +47,7 @@ function AlertTitle({ className, ...props }: ComponentProps<"div">) {
 	);
 }
 
-function AlertDescription({ className, ...props }: ComponentProps<"div">) {
+function AlertDescription({ className, ...props }: React.ComponentProps<"div">) {
 	return (
 		<div
 			data-slot="alert-description"
@@ -61,10 +60,10 @@ function AlertDescription({ className, ...props }: ComponentProps<"div">) {
 	);
 }
 
-function AlertAction({ className, ...props }: ComponentProps<"div">) {
+function AlertAction({ className, ...props }: React.ComponentProps<"div">) {
 	return (
 		<div data-slot="alert-action" className={cn("absolute top-2 right-2", className)} {...props} />
 	);
 }
 
-export { Alert, AlertAction, AlertDescription, AlertTitle };
+export { Alert, AlertTitle, AlertDescription, AlertAction };
