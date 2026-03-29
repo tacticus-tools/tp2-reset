@@ -73,6 +73,7 @@
 		"no-inline-comments": "off",
 		"array-callback-return": ["error", { "allowImplicit": true }],
 		"id-length": ["error", { "exceptions": ["z"] }],
+		"no-warning-comments": "off", // I use todo-tree tools
 		// Broken autocorrect - https://github.com/oxc-project/oxc/issues/20830
 		"sort-keys": "off"
 	},
