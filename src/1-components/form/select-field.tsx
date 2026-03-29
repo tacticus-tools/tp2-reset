@@ -1,5 +1,12 @@
-import { Label } from "../ui/label.tsx";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select.tsx";
+import { Label } from "#src/1-components/ui/label.tsx";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "#src/1-components/ui/select.tsx";
+
 import { FieldErrors } from "./field-errors.tsx";
 import { useFieldContext } from "./form-context.ts";
 

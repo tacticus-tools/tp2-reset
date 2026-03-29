@@ -1,12 +1,12 @@
 import { v } from "convex/values";
 
 import { mutation, query } from "./_generated/server";
-export const list = query({
+const list = query({
 	args: {},
 	handler: async (ctx) =>
 		await ctx.db.query("todos").withIndex("by_creation_time").order("desc").collect(),
 });
-export const add = mutation({
+const add = mutation({
 	args: { text: v.string() },
 	handler: async (ctx, args) =>
 		await ctx.db.insert("todos", {
@@ -14,19 +14,20 @@ export const add = mutation({
 			text: args.text,
 		}),
 });
-export const toggle = mutation({
+const toggle = mutation({
 	args: { id: v.id("todos") },
 	handler: async (ctx, args) => {
 		const todo = await ctx.db.get(args.id);
-		if (!todo) {
-			throw new Error("Todo not found");
-		}
+		if (!todo) throw new Error("Todo not found");
+
 		return await ctx.db.patch(args.id, {
 			completed: !todo.completed,
 		});
 	},
 });
-export const remove = mutation({
+const remove = mutation({
 	args: { id: v.id("todos") },
 	handler: async (ctx, args) => await ctx.db.delete(args.id),
 });
+
+export { list, add, toggle, remove };

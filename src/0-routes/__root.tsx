@@ -1,3 +1,4 @@
+// oxlint-disable import/max-dependencies -- glue file
 import appCss from "#src/styles.css?url";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { formDevtoolsPlugin } from "@tanstack/react-form-devtools";
@@ -22,23 +23,11 @@ const { queryClient } = getContext();
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
 	head: () => ({
-		links: [
-			{
-				href: appCss,
-				rel: "stylesheet",
-			},
-		],
+		links: [{ href: appCss, rel: "stylesheet" }],
 		meta: [
-			{
-				charSet: "utf8",
-			},
-			{
-				content: "width=device-width, initial-scale=1",
-				name: "viewport",
-			},
-			{
-				title: "TP2 Reset",
-			},
+			{ charSet: "utf8" },
+			{ content: "width=device-width, initial-scale=1", name: "viewport" },
+			{ title: "TP2 Reset" },
 		],
 	}),
 
@@ -49,7 +38,6 @@ function RootDocument({ children }: { children: ReactNode }) {
 	return (
 		// Suppress the hydration warning that occurs from `className="dark"` being added to the document element on the client, which is required for dark mode support.
 		// Default to dark mode to prevent a flash of light mode for dark mode users on initial load - less jarring for a flash of dark for light mode users
-		// eslint-disable-next-line better-tailwindcss/no-unknown-classes
 		<html lang="en" className="dark" suppressHydrationWarning>
 			<head>
 				<HeadContent />

@@ -1,3 +1,4 @@
+// oxlint-disable react/jsx-max-depth -- the way the shadcn sidebar is architected makes the nesting deep
 "use client";
 
 import { Link } from "@tanstack/react-router";

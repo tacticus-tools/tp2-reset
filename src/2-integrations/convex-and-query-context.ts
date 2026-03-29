@@ -6,9 +6,9 @@ import { env } from "#src/env.ts";
 import { ConvexQueryClient } from "@convex-dev/react-query";
 import { QueryClient } from "@tanstack/react-query";
 
-export const convexQueryClient = new ConvexQueryClient(env.VITE_CONVEX_URL);
+const convexQueryClient = new ConvexQueryClient(env.VITE_CONVEX_URL);
 
-export const queryClient: QueryClient = new QueryClient({
+const queryClient: QueryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
 			queryFn: convexQueryClient.queryFn(),
@@ -19,6 +19,8 @@ export const queryClient: QueryClient = new QueryClient({
 
 convexQueryClient.connect(queryClient);
 
-export function getContext() {
+function getContext() {
 	return { convexQueryClient, queryClient };
 }
+
+export { getContext, queryClient, convexQueryClient };

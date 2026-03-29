@@ -1,3 +1,4 @@
+// oxlint-disable react/jsx-max-depth -- the way the shadcn sidebar is architected makes the nesting deep
 "use client";
 
 import { Link } from "@tanstack/react-router";
@@ -35,6 +36,7 @@ const THEME_OPTIONS = [
 	{ icon: MonitorIcon, label: "System", value: "system" as const },
 ];
 
+// oxlint-disable-next-line max-lines-per-function
 export function NavUser({
 	user,
 }: {
