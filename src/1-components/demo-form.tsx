@@ -17,14 +17,14 @@ export function DemoForm() {
 			isHuman: false,
 			userName: "",
 		},
-		onSubmit: async ({ value }) => {
+		onSubmit: ({ value }) => {
 			toast("You submitted the following values:", {
 				classNames: {
 					content: "flex flex-col gap-2",
 				},
 				description: (
 					<pre className="mt-2 w-80 overflow-x-auto rounded-md p-4">
-						<code>{JSON.stringify(value, null, 2)}</code>
+						<code>{JSON.stringify(value)}</code>
 					</pre>
 				),
 				position: "bottom-right",

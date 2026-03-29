@@ -1,5 +1,3 @@
-import type * as React from "react";
-
 import avatar from "#src/5-assets/images/snowprint_assets/characters/ui_image_RoundPortrait_adept_canoness_01.png";
 
 import {
@@ -13,9 +11,9 @@ import {
 import { NavMain } from "./nav-main.tsx";
 import { NavUser } from "./nav-user.tsx";
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar() {
 	return (
-		<Sidebar collapsible="offcanvas" {...props}>
+		<Sidebar collapsible="offcanvas">
 			<SidebarHeader>Tacticus Planner</SidebarHeader>
 			<SidebarContent>
 				<NavMain />

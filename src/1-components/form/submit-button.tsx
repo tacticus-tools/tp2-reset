@@ -1,6 +1,7 @@
 import { useStore } from "@tanstack/react-form";
 
-import { Button } from "../ui/button.tsx";
+import { Button } from "#src/1-components/ui/button.tsx";
+
 import { useFormContext } from "./form-context.ts";
 
 interface SubmitButtonProps {

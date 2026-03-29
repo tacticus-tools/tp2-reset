@@ -1,6 +1,10 @@
 {
 	"$schema": "./node_modules/oxlint/configuration_schema.json",
 	"plugins": ["eslint", "typescript", "unicorn", "oxc", "react", "jsx-a11y", "import"],
+	"options": {
+		"reportUnusedDisableDirectives": "error",
+		"typeAware": false // TODO: enable this https://oxc.rs/docs/guide/usage/linter/config-file-reference.html#options-typeaware
+	},
 	"categories": {
 		"correctness": "error",
 		"suspicious": "error",
@@ -21,7 +25,9 @@
 		"**/*.generated.ts",
 		"**/*.generated.json",
 		"**/src/5-assets/legacy-json/**",
-		"**/node_modules/**"
+		"**/src/1-components/ui/**", // shadcn provided and full of legacy support hacks
+		"**/node_modules/**",
+		"reset.d.ts"
 	],
 	"rules": {
 		// TanStack Form passes children as a prop: https://tanstack.com/form/v1/docs/framework/react/guides/basic-concepts#field
@@ -49,7 +55,7 @@
 		"no-magic-numbers": [
 			"error",
 			{
-				"ignore": [0, 1],
+				"ignore": [0, 1, 2, 7, 24, 60],
 				"ignoreDefaultValues": true,
 				"ignoreNumericLiteralTypes": true
 			}
@@ -60,9 +66,15 @@
 		"import/no-named-export": "off",
 		"import/no-default-export": "error",
 		"import/prefer-default-export": "off",
-		// Ternaries are fine for simple constructs
+		// Personal preferences
 		"no-ternary": "off",
-		"react/jsx-max-depth": ["error", { "max": 4 }]
+		"react/jsx-max-depth": ["error", { "max": 7 }], // a bit high but I don't want to push people into indirection
+		"curly": ["error", "multi-or-nest", "consistent"],
+		"no-inline-comments": "off",
+		"array-callback-return": ["error", { "allowImplicit": true }],
+		"id-length": ["error", { "exceptions": ["z"] }],
+		// Broken autocorrect - https://github.com/oxc-project/oxc/issues/20830
+		"sort-keys": "off"
 	},
 	"overrides": [
 		{

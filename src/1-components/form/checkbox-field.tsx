@@ -1,5 +1,6 @@
-import { Checkbox } from "../ui/checkbox.tsx";
-import { FieldDescription, FieldLabel } from "../ui/field.tsx";
+import { Checkbox } from "#src/1-components/ui/checkbox.tsx";
+import { FieldDescription, FieldLabel } from "#src/1-components/ui/field.tsx";
+
 import { FieldErrors } from "./field-errors.tsx";
 import { useFieldContext } from "./form-context.ts";
 

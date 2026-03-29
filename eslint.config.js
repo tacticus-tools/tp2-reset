@@ -21,6 +21,7 @@ export default defineConfig([
 		"**/src/routeTree.gen.ts",
 		"**/dist/**/*",
 		"**/node_modules/**",
+		"**/src/1-components/ui/**",
 	]),
 	{
 		files: ["**/*.ts", "**/*.tsx"],
@@ -30,10 +31,10 @@ export default defineConfig([
 	...queryPlugin.configs["flat/recommended"],
 	...routerPlugin.configs["flat/recommended"],
 	jestDomPlugin.configs["flat/recommended"],
-	rtlPlugin.configs["flat/react"],
 	{
-		files: ["**/*.ts", "**/*.tsx"],
 		...tailwindPlugin.configs.recommended,
+		files: ["**/*.ts", "**/*.tsx"],
+		ignores: ["**/__root.tsx"],
 		settings: {
 			"better-tailwindcss": {
 				entryPoint: "src/styles.css",
@@ -45,6 +46,10 @@ export default defineConfig([
 			"better-tailwindcss/enforce-canonical-classes": "error",
 			"better-tailwindcss/enforce-consistent-line-wrapping": "off",
 		},
+	},
+	{
+		...rtlPlugin.configs["flat/react"],
+		files: ["**/*.spec.ts", "**/*.spec.tsx", "**/*.test.ts", "**/*.test.tsx"],
 	},
 	// Disable ESLint rules already covered by Oxlint to prevent double-reporting.
 	// Derived directly from .oxlintrc.json so it stays in sync with our oxlint config.

@@ -1,3 +1,4 @@
+// oxlint-disable-next-line import/no-namespace -- we want everything
 import * as matchers from "@testing-library/jest-dom/matchers";
 import type { ReactNode } from "react";
 import { expect, vi } from "vitest";

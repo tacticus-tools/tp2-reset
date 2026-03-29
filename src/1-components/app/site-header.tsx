@@ -18,10 +18,7 @@ export function SiteHeader() {
 
 	const breadcrumbs = matches
 		.filter((match) => match.context.title)
-		.map(({ pathname, context }) => ({
-			path: pathname,
-			title: context.title,
-		}));
+		.map(({ pathname, context }) => ({ path: pathname, title: context.title }));
 
 	return (
 		<header className="flex h-16 shrink-0 items-center gap-2">
@@ -32,20 +29,17 @@ export function SiteHeader() {
 					<BreadcrumbList>
 						{breadcrumbs.map((match, index) => {
 							// Index routes have the same path as their layout route with a slash added, so we skip them in the breadcrumbs
-							if (match.path === `${path}/`) {
-								return;
-							}
+							if (match.path === `${path}/`) return;
 
 							// The root route and root page have the same path, so only show the first one.
-							if (match.path === "/" && index !== 0) {
-								return;
-							}
+							if (match.path === "/" && index !== 0) return;
 
 							return (
 								<Fragment key={match.path}>
 									{match.path !== path && (
 										<>
 											<BreadcrumbItem>
+												{/* oxlint-disable-next-line react/jsx-max-depth*/}
 												<BreadcrumbLink render={<Link to={match.path} />}>
 													{match.title}
 												</BreadcrumbLink>
