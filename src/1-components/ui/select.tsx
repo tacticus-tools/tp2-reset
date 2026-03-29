@@ -1,10 +1,10 @@
 "use client";
 
 import { Select as SelectPrimitive } from "@base-ui/react/select";
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
-import type { ComponentProps } from "react";
+import { ChevronDownIcon, CheckIcon, ChevronUpIcon } from "lucide-react";
+import * as React from "react";
 
-import { cn } from "#src/4-lib/shadcn/utils.ts";
+import { cn } from "#src/4-lib/shadcn/utils";
 
 const Select = SelectPrimitive.Root;
 
@@ -143,7 +143,7 @@ function SelectSeparator({ className, ...props }: SelectPrimitive.Separator.Prop
 function SelectScrollUpButton({
 	className,
 	...props
-}: ComponentProps<typeof SelectPrimitive.ScrollUpArrow>) {
+}: React.ComponentProps<typeof SelectPrimitive.ScrollUpArrow>) {
 	return (
 		<SelectPrimitive.ScrollUpArrow
 			data-slot="select-scroll-up-button"
@@ -161,7 +161,7 @@ function SelectScrollUpButton({
 function SelectScrollDownButton({
 	className,
 	...props
-}: ComponentProps<typeof SelectPrimitive.ScrollDownArrow>) {
+}: React.ComponentProps<typeof SelectPrimitive.ScrollDownArrow>) {
 	return (
 		<SelectPrimitive.ScrollDownArrow
 			data-slot="select-scroll-down-button"
