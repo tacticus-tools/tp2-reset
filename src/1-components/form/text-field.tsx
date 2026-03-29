@@ -1,4 +1,4 @@
-import { Input } from "#src/1-components//ui/input.tsx";
+import { Input } from "#src/1-components/ui/input.tsx";
 import { Field, FieldDescription, FieldLabel } from "#src/1-components/ui/field.tsx";
 
 import { FieldErrors } from "./field-errors.tsx";
