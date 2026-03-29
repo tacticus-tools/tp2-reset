@@ -30,6 +30,6 @@ export default defineConfig({
 				inline: [/tiny-warning/],
 			},
 		},
-		setupFiles: ["./test-setup.tsx"],
+		setupFiles: ["./test_setup.tsx"],
 	},
 });

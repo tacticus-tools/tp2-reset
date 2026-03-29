@@ -14,7 +14,7 @@ const config = defineConfig({
 		tailwindcss(),
 		tanstackStart({
 			prerender: { enabled: true },
-			router: { routesDirectory: "0-routes" },
+			router: { routesDirectory: "0_routes" },
 			spa: { enabled: true },
 		}),
 		react(),
@@ -22,7 +22,6 @@ const config = defineConfig({
 			presets: [reactCompilerPreset()],
 		}),
 	],
-	resolve: { tsconfigPaths: true },
 	ssr: {
 		/* @convex-dev/auth/react has a "use client" directive that the
 		 * Cloudflare Workers SSR environment misinterprets as an RSC boundary,
