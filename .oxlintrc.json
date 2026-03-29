@@ -111,17 +111,5 @@
 				"no-use-before-define": "off"
 			}
 		},
-		{
-			// shadcn/ui components get a pass on a lot of rules since we're not doing much maintenance on them
-			"files": ["**/src/1-components/ui/**"],
-			"rules": {
-				"react/no-multi-comp": "off",
-				"oxc/no-rest-spread-properties": "off",
-				// shadcn/ui forwards props to underlying DOM elements via {...props} spreading
-				"react/jsx-props-no-spreading": "off",
-				// shadcn/ui intentionally exports non-component values (e.g. buttonVariants, useSidebar) alongside components
-				"react/only-export-components": "off"
-			}
-		}
 	]
 }
