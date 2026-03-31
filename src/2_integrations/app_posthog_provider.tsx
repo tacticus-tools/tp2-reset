@@ -14,7 +14,7 @@ interface PostHogProviderProps {
 
 export function AppPostHogProvider({ children }: PostHogProviderProps) {
 	return (
-		<PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_PROJECT_TOKEN} options={options}>
+		<PostHogProvider apiKey={env.VITE_PUBLIC_POSTHOG_PROJECT_TOKEN} options={options}>
 			{children}
 		</PostHogProvider>
 	);
