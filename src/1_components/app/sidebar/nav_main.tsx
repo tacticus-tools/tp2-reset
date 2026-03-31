@@ -1,4 +1,4 @@
-// oxlint-disable react/jsx-max-depth -- the way the shadcn sidebar is architected makes the nesting deep
+//
 "use client";
 
 import { Link } from "@tanstack/react-router";
@@ -20,51 +20,48 @@ import {
 	SidebarMenuSubItem,
 } from "#src/1_components/ui/sidebar";
 
+//
 export function NavMain() {
 	return (
-		<>
+		<SidebarMenu>
 			<SidebarGroup>
+				<SidebarMenuItem>
+					<SidebarMenuButton render={<Link to="/settings" />} children="Settings" />
+				</SidebarMenuItem>
 				<SidebarGroupLabel>Plan</SidebarGroupLabel>
-				<SidebarMenu>
-					<Collapsible defaultOpen className="group/collapsible" render={<SidebarMenuItem />}>
-						<CollapsibleTrigger render={<SidebarMenuButton tooltip="Legendary Release Events" />}>
-							<Sword />
-							<span>Legendary Release Events</span>
-							<ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-open/collapsible:rotate-90" />
-						</CollapsibleTrigger>
-						<CollapsibleContent>
-							<SidebarMenuSub>
-								<SidebarMenuSubItem>
-									<SidebarMenuSubButton
-										render={<Link to="/plan/lre/trajann" />}
-										children="Trajann"
-									/>
-								</SidebarMenuSubItem>
-								<SidebarMenuSubItem>
-									<SidebarMenuSubButton render={<Link to="/plan/lre/lucius" />} children="Lucius" />
-								</SidebarMenuSubItem>
-							</SidebarMenuSub>
-						</CollapsibleContent>
-					</Collapsible>
-				</SidebarMenu>
+				<Collapsible defaultOpen className="group/collapsible" render={<SidebarMenuItem />}>
+					<CollapsibleTrigger render={<SidebarMenuButton tooltip="Legendary Release Events" />}>
+						<Sword />
+						<span>Legendary Release Events</span>
+						<ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-open/collapsible:rotate-90" />
+					</CollapsibleTrigger>
+					<CollapsibleContent>
+						<SidebarMenuSub>
+							<SidebarMenuSubItem>
+								<SidebarMenuSubButton render={<Link to="/plan/lre/trajann" />} children="Trajann" />
+							</SidebarMenuSubItem>
+							<SidebarMenuSubItem>
+								<SidebarMenuSubButton render={<Link to="/plan/lre/lucius" />} children="Lucius" />
+							</SidebarMenuSubItem>
+						</SidebarMenuSub>
+					</CollapsibleContent>
+				</Collapsible>
 			</SidebarGroup>
 			<SidebarGroup>
 				<SidebarGroupLabel>Learn</SidebarGroupLabel>
-				<SidebarMenu>
-					<SidebarMenuItem>
-						<SidebarMenuButton render={<Link to="/" />} children="Onslaught" />
-					</SidebarMenuItem>
-					<SidebarMenuItem>
-						<SidebarMenuButton render={<Link to="/" />} children="Salvage Run" />
-					</SidebarMenuItem>
-					<SidebarMenuItem>
-						<SidebarMenuButton render={<Link to="/" />} children="Equipment" />
-					</SidebarMenuItem>
-					<SidebarMenuItem>
-						<SidebarMenuButton render={<Link to="/" />} children="Upgrades" />
-					</SidebarMenuItem>
-				</SidebarMenu>
+				<SidebarMenuItem>
+					<SidebarMenuButton render={<Link to="/" />} children="(FAKE) Onslaught" />
+				</SidebarMenuItem>
+				<SidebarMenuItem>
+					<SidebarMenuButton render={<Link to="/" />} children="(FAKE) Salvage Run" />
+				</SidebarMenuItem>
+				<SidebarMenuItem>
+					<SidebarMenuButton render={<Link to="/" />} children="(FAKE) Equipment" />
+				</SidebarMenuItem>
+				<SidebarMenuItem>
+					<SidebarMenuButton render={<Link to="/" />} children="(FAKE) Upgrades" />
+				</SidebarMenuItem>
 			</SidebarGroup>
-		</>
+		</SidebarMenu>
 	);
 }

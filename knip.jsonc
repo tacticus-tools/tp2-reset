@@ -2,5 +2,5 @@
 	"$schema": "https://unpkg.com/knip@5/schema.json",
 	"tags": ["-lintignore"],
 	"ignore": ["src/1_components/ui/**/*"], // shadcn/ui components — keep all available
-	"ignoreExportsUsedInFile": true
+	"ignoreExportsUsedInFile": true,
 }
