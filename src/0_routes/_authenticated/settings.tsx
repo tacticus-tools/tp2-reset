@@ -4,7 +4,7 @@ import { useForm } from "@tanstack/react-form";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 
-import { userSettingsSchema } from "#common/schemas";
+import { UserSettingsSchema } from "#common/schemas";
 
 import { api } from "#convex/_generated/api";
 
@@ -74,7 +74,7 @@ function RouteComponent() {
 						name="apiKey"
 						validators={{
 							onBlur: ({ value }) => {
-								const result = userSettingsSchema.shape.apiKey.safeParse(value.trim());
+								const result = UserSettingsSchema.shape.apiKey.safeParse(value.trim());
 								// oxlint-disable-next-line no-undefined
 								return result.success ? undefined : result.error.issues[0]?.message;
 							},
