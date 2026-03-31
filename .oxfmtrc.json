@@ -3,13 +3,14 @@
 	"useTabs": true,
 	"singleQuote": false,
 	"ignorePatterns": [
-		"src/routeTree.gen.ts",
-		"src/styles.css",
-		"convex/_generated/**",
-		"dist/**",
-		"**/*.generated.json",
+		"**/convex/_generated/**",
+		"**/src/routeTree.gen.ts",
+		"**/dist/**",
 		"**/*.generated.ts",
-		"data.raw.json"
+		"**/*.generated.json",
+		"**/src/1_components/ui/**", // would just complicate diffs
+		"**/node_modules/**",
+		"reset.d.ts"
 	],
 	"sortImports": {
 		"internalPattern": ["#*", "#*/**"],

@@ -1,4 +1,3 @@
-import { getAuthUserId } from "@convex-dev/auth/server";
 import { v } from "convex/values";
 
 import { userSettingsSchema } from "#common/schemas";
@@ -8,24 +7,23 @@ import { mutation, query } from "./_generated/server";
 const getUserSettings = query({
 	args: {},
 	handler: async (ctx) => {
-		const userId = await getAuthUserId(ctx);
-		if (!userId) throw new Error("Not authenticated");
+		const identity = await ctx.auth.getUserIdentity();
+		if (!identity) throw new Error("Not authenticated");
+		const { tokenIdentifier } = identity;
 
 		return await ctx.db
 			.query("userSettings")
-			.withIndex("by_userId", (q) => q.eq("userId", userId))
+			.withIndex("by_tokenIdentifier", (q) => q.eq("tokenIdentifier", tokenIdentifier))
 			.unique();
 	},
 });
 
 const upsertUserSettings = mutation({
-	args: {
-		apiKey: v.string(),
-	},
+	args: { apiKey: v.string() },
 	handler: async (ctx, args) => {
-		const userId = await getAuthUserId(ctx);
-		if (!userId) throw new Error("Not authenticated");
-
+		const identity = await ctx.auth.getUserIdentity();
+		if (!identity) throw new Error("Not authenticated");
+		const { tokenIdentifier } = identity;
 		// Validate against Zod schema
 		const parsed = userSettingsSchema.safeParse({ apiKey: args.apiKey });
 		if (!parsed.success) {
@@ -35,12 +33,12 @@ const upsertUserSettings = mutation({
 
 		const existing = await ctx.db
 			.query("userSettings")
-			.withIndex("by_userId", (q) => q.eq("userId", userId))
+			.withIndex("by_tokenIdentifier", (q) => q.eq("tokenIdentifier", tokenIdentifier))
 			.unique();
 
 		// oxlint-disable-next-line unicorn/prefer-ternary
 		if (existing) await ctx.db.patch(existing._id, { apiKey: parsed.data.apiKey });
-		else await ctx.db.insert("userSettings", { userId, apiKey: parsed.data.apiKey });
+		else await ctx.db.insert("userSettings", { tokenIdentifier, apiKey: parsed.data.apiKey });
 	},
 });
 

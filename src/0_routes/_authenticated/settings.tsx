@@ -1,15 +1,13 @@
-import { convexQuery, useConvexMutation } from "@convex-dev/react-query";
+import { useConvexMutation, convexQuery } from "@convex-dev/react-query";
 import { useForm } from "@tanstack/react-form";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useConvexAuth } from "convex/react";
-import { useEffect } from "react";
+import { createFileRoute } from "@tanstack/react-router";
 
 import { userSettingsSchema } from "#common/schemas";
 
 import { api } from "#convex/_generated/api";
 
-export const Route = createFileRoute("/settings")({
+export const Route = createFileRoute("/_authenticated/settings")({
 	component: RouteComponent,
 	context: () => ({ title: "Settings" }),
 });
@@ -22,16 +20,10 @@ function maskApiKey(key: string): string {
 
 // oxlint-disable-next-line max-lines-per-function
 function RouteComponent() {
-	const { isAuthenticated, isLoading } = useConvexAuth();
-	const navigate = useNavigate();
-	const { data: settings, isPending } = useQuery(
-		convexQuery(api.user_settings.getUserSettings, {}),
-	);
-
-	const upsertFn = useConvexMutation(api.user_settings.upsertUserSettings);
+	const { data: settings, isPending } = useQuery(convexQuery(api.user_settings.getUserSettings));
 
 	const mutation = useMutation({
-		mutationFn: (values: { apiKey: string }) => upsertFn(values),
+		mutationFn: useConvexMutation(api.user_settings.upsertUserSettings),
 	});
 
 	const form = useForm({
@@ -42,19 +34,13 @@ function RouteComponent() {
 		},
 	});
 
-	useEffect(() => {
-		if (!isLoading && !isAuthenticated) navigate({ to: "/login" });
-	}, [isAuthenticated, isLoading, navigate]);
-
-	if (!isAuthenticated) return;
-
 	return (
 		<div className="max-w-lg">
-			<h1 className="text-2xl font-semibold text-gray-900 mb-1">Settings</h1>
-			<p className="text-sm text-gray-500 mb-8">Manage your API key.</p>
+			<h1 className="mb-1 text-2xl font-semibold text-gray-100">Settings</h1>
+			<p className="mb-8 text-sm text-gray-500">Manage your API key.</p>
 
-			<section className="bg-white border border-gray-200 rounded-lg p-5">
-				<h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-4">
+			<section className="rounded-lg border border-gray-800 bg-gray-800 p-5">
+				<h2 className="mb-4 text-sm font-semibold tracking-wide text-gray-200 uppercase">
 					API Key
 				</h2>
 
@@ -62,12 +48,12 @@ function RouteComponent() {
 					<p className="text-sm text-gray-400">Loading…</p>
 				) : (
 					<div className="mb-4">
-						<p className="text-xs text-gray-500 mb-1">Current key</p>
-						<code className="text-sm font-mono bg-gray-50 border border-gray-200 rounded px-3 py-2 block">
+						<p className="mb-1 text-xs text-gray-300">Current key</p>
+						<code className="block rounded-sm border border-gray-200 bg-gray-50 px-3 py-2 font-mono text-sm text-black">
 							{settings?.apiKey ? (
 								maskApiKey(settings.apiKey)
 							) : (
-								<span className="text-gray-400 italic">Not set</span>
+								<span className="text-gray-300 italic">Not set</span>
 							)}
 						</code>
 					</div>
@@ -94,7 +80,7 @@ function RouteComponent() {
 							<div>
 								<label
 									htmlFor={field.name}
-									className="block text-xs font-medium text-gray-700 mb-1"
+									className="mb-1 block text-xs font-medium text-gray-700"
 								>
 									New API key
 								</label>
@@ -105,24 +91,24 @@ function RouteComponent() {
 									onChange={(event) => field.handleChange(event.target.value)}
 									onBlur={field.handleBlur}
 									placeholder="Paste your API key here"
-									className="w-full px-3 py-2 text-sm border border-gray-200 rounded focus:outline-none focus:border-gray-400 font-mono"
+									className="w-full rounded-sm border border-gray-200 px-3 py-2 font-mono text-sm focus:border-gray-400 focus:outline-none"
 									autoComplete="off"
 									spellCheck={false}
 								/>
 								{field.state.meta.errors.length > 0 && (
-									<p className="text-xs text-red-600 mt-1">{field.state.meta.errors[0]}</p>
+									<p className="mt-1 text-xs text-red-600">{field.state.meta.errors[0]}</p>
 								)}
 							</div>
 						)}
 					</form.Field>
 
 					{mutation.isError && (
-						<p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2">
+						<p className="rounded-sm border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-600">
 							{mutation.error instanceof Error ? mutation.error.message : "Failed to save"}
 						</p>
 					)}
 					{mutation.isSuccess && (
-						<p className="text-sm text-green-700 bg-green-50 border border-green-200 rounded px-3 py-2">
+						<p className="rounded-sm border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-700">
 							API key saved.
 						</p>
 					)}
@@ -132,7 +118,7 @@ function RouteComponent() {
 							<button
 								type="submit"
 								disabled={(isSubmitting as boolean) || !(apiKey as string).trim()}
-								className="self-start px-4 py-2 text-sm font-medium bg-gray-900 text-white rounded hover:bg-gray-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+								className="self-start rounded-sm bg-gray-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-40"
 							>
 								{isSubmitting ? "Saving…" : "Save"}
 							</button>

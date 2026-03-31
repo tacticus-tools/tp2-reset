@@ -1,3 +1,5 @@
+import { SignedIn, SignInButton, SignedOut, UserButton } from "@clerk/clerk-react";
+
 import avatar from "#src/5_assets/images/snowprint_assets/characters/ui_image_RoundPortrait_adept_canoness_01.png";
 
 import {
@@ -26,6 +28,12 @@ export function AppSidebar() {
 						name: "shadcn",
 					}}
 				/>
+				<SignedIn>
+					<UserButton />
+				</SignedIn>
+				<SignedOut>
+					<SignInButton />
+				</SignedOut>
 			</SidebarFooter>
 			<SidebarRail />
 		</Sidebar>

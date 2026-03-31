@@ -8,7 +8,6 @@
  * @module
  */
 
-import type * as auth from "../auth.js";
 import type * as user_settings from "../user_settings.js";
 
 import type {
@@ -18,7 +17,6 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
-  auth: typeof auth;
   user_settings: typeof user_settings;
 }>;
 

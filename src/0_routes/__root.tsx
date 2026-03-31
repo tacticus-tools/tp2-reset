@@ -1,67 +1,71 @@
-// oxlint-disable import/max-dependencies -- glue file
 import appCss from "#src/styles.css?url";
-import { TanStackDevtools } from "@tanstack/react-devtools";
-import { formDevtoolsPlugin } from "@tanstack/react-form-devtools";
-import type { QueryClient } from "@tanstack/react-query";
-import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
-import { HeadContent, Scripts, createRootRouteWithContext } from "@tanstack/react-router";
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import type { ReactNode } from "react";
-import { Toaster } from "sonner";
+import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from "@tanstack/react-router";
 
-import { getContext } from "#src/2_integrations/convex_and_query_context.ts";
+import { AppClerkProvider } from "#src/2_integrations/app_clerk_provider.tsx";
+import { AppConvexProvider } from "#src/2_integrations/app_convex_provider.tsx";
+import { AppPostHogProvider } from "#src/2_integrations/app_posthog_provider.tsx";
+import type { Context } from "#src/2_integrations/app_query_context.ts";
+import { AppQueryProvider } from "#src/2_integrations/app_query_provider.tsx";
 
-import { AppLayout } from "#src/1_components/app/app_layout";
-import { TooltipProvider } from "#src/1_components/ui/tooltip";
+import { AppLayout } from "#src/1_components/app/app_layout.tsx";
 
-interface MyRouterContext {
-	queryClient: QueryClient;
-	title: string;
-}
+const THEME_INIT_SCRIPT = `(function(){try{var stored=window.localStorage.getItem('theme');var mode=(stored==='light'||stored==='dark'||stored==='auto')?stored:'auto';var prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;var resolved=mode==='auto'?(prefersDark?'dark':'light'):mode;var root=document.documentElement;root.classList.remove('light','dark');root.classList.add(resolved);if(mode==='auto'){root.removeAttribute('data-theme')}else{root.setAttribute('data-theme',mode)}root.style.colorScheme=resolved;}catch(e){}})();`;
 
-const { queryClient } = getContext();
-
-export const Route = createRootRouteWithContext<MyRouterContext>()({
+export const Route = createRootRouteWithContext<Context>()({
 	head: () => ({
-		links: [{ href: appCss, rel: "stylesheet" }],
+		links: [
+			{ rel: "stylesheet", href: appCss },
+			{
+				rel: "apple-touch-icon",
+				sizes: "180x180",
+				href: "/apple-touch-icon.png",
+			},
+			{
+				rel: "icon",
+				type: "image/png",
+				sizes: "32x32",
+				href: "/favicon-32x32.png",
+			},
+			{
+				rel: "icon",
+				type: "image/png",
+				sizes: "16x16",
+				href: "/favicon-16x16.png",
+			},
+			{ rel: "manifest", href: "/site.webmanifest", color: "#fffff" },
+			{ rel: "icon", href: "/favicon.ico" },
+		],
 		meta: [
 			{ charSet: "utf8" },
-			{ content: "width=device-width, initial-scale=1", name: "viewport" },
-			{ title: "TP2 Reset" },
+			{ name: "viewport", content: "width=device-width, initial-scale=1" },
+			{ title: "Tacticus Planner" },
 		],
 	}),
-
-	shellComponent: RootDocument,
+	component: RootComponent,
 });
 
-function RootDocument({ children }: { children: ReactNode }) {
+function RootComponent() {
 	return (
-		// Suppress the hydration warning that occurs from `className="dark"` being added to the document element on the client, which is required for dark mode support.
-		// Default to dark mode to prevent a flash of light mode for dark mode users on initial load - less jarring for a flash of dark for light mode users
-		<html lang="en" className="dark" suppressHydrationWarning>
-			<head>
-				<HeadContent />
-			</head>
-			<body>
-				<TooltipProvider>
-					<AppLayout>{children}</AppLayout>
-					<TanStackDevtools
-						config={{
-							position: "bottom-right",
-						}}
-						plugins={[
-							{ name: "Router", render: <TanStackRouterDevtoolsPanel /> },
-							{
-								name: "Query",
-								render: <ReactQueryDevtoolsPanel client={queryClient} />,
-							},
-							formDevtoolsPlugin(),
-						]}
-					/>
-					<Toaster richColors theme="system" />
-					<Scripts />
-				</TooltipProvider>
-			</body>
-		</html>
+		<AppClerkProvider>
+			<AppConvexProvider>
+				<AppQueryProvider>
+					<AppPostHogProvider>
+						<html lang="en" suppressHydrationWarning>
+							<head>
+								{/* oxlint-disable-next-line react/no-danger */}
+								<script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+								<HeadContent />
+							</head>
+							<body>
+								<AppLayout>
+									<Outlet />
+								</AppLayout>
+								<Scripts />
+							</body>
+						</html>
+					</AppPostHogProvider>
+				</AppQueryProvider>
+			</AppConvexProvider>
+		</AppClerkProvider>
 	);
 }
