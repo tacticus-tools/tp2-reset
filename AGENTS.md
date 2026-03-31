@@ -29,7 +29,7 @@ bun run build-ci  # REQUIRED before commit
 - **Auth**: `@convex-dev/auth`
 - **Styling**: Tailwind CSS v4
 - **Format**: Oxfmt (`.oxfmtrc.json`)
-- **Lint**: Oxlint (`.oxlintrc.json`) + ESLint (`eslint.config.js`) for specialty plugins
+- **Lint**: Oxlint (`.oxlintrc.json`) + ESLint (`eslint.config.ts`) for specialty plugins
 
 ## Key Commands
 

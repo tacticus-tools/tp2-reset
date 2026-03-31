@@ -342,3 +342,13 @@ See below for the template. Don't bother with date & author since git will handl
   - 3. Use `Object.freeze()` to make the JSON truly immutable at runtime. This protects us from runtime changes but doesn't give us any compile-time protection.
   - 4. Use a combination of `Object.freeze()` and a custom `DeepReadonly` type to achieve both runtime and compile-time immutability.
 - **Chosen solution**: Use a combination of `Object.freeze()` and a custom `DeepReadonly` type. It gives the best protection against accidental mutations. Working with `readonly` types takes some getting used to but I think it's worth it for our core static assets.
+
+### Decision: Use `Clerk` for authentication
+
+- **Motivation**: The previous iteration of the app used passwords but didn't have email auth, password resets, etc... We want to switch to OAuth and have something that integrates with our backend
+- **Alternatives considered**:
+  - 1. WorkOS: Aimed towards B2B SaaS
+  - 2. ConvexAuth: Requires additional accounts for each social provider
+  - 3. Clerk: Targeted towards simpler apps; proves drop in React components
+  - 4. Auth0: Has sort of fallen off the wagon.
+- **Chosen solution**: Clerk. I don't want to separately manage a Google dev account, an Apple dev account, a Facebook dev account, ...

@@ -10,7 +10,7 @@
 		"**/*.generated.json",
 		"**/src/1_components/ui/**", // would just complicate diffs
 		"**/node_modules/**",
-		"reset.d.ts"
+		"reset.d.ts",
 	],
 	"sortImports": {
 		"internalPattern": ["#*", "#*/**"],
@@ -22,7 +22,7 @@
 			{ "groupName": "src_3", "elementNamePattern": ["#src/3_*/**"] },
 			{ "groupName": "src_2", "elementNamePattern": ["#src/2_*/**"] },
 			{ "groupName": "src_1", "elementNamePattern": ["#src/1_*/**"] },
-			{ "groupName": "src_0", "elementNamePattern": ["#src/0_*/**"] }
+			{ "groupName": "src_0", "elementNamePattern": ["#src/0_*/**"] },
 		],
 		"groups": [
 			"builtin",
@@ -35,7 +35,7 @@
 			"src_2",
 			"src_1",
 			"src_0",
-			"unknown"
-		]
-	}
+			"unknown",
+		],
+	},
 }

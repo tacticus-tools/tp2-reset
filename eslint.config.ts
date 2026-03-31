@@ -21,7 +21,7 @@ export default defineConfig([
 		"**/src/routeTree.gen.ts",
 		"**/dist/**/*",
 		"**/node_modules/**",
-		"**/src/1-components/ui/**",
+		"**/src/1_components/ui/**",
 	]),
 	{
 		files: ["**/*.ts", "**/*.tsx"],
