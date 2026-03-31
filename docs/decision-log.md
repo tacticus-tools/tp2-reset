@@ -349,6 +349,6 @@ See below for the template. Don't bother with date & author since git will handl
 - **Alternatives considered**:
   - 1. WorkOS: Aimed towards B2B SaaS
   - 2. ConvexAuth: Requires additional accounts for each social provider
-  - 3. Clerk: Targeted towards simpler apps; proves drop in React components
+  - 3. Clerk: Targeted towards simpler apps; provides drop-in React components
   - 4. Auth0: Has sort of fallen off the wagon.
 - **Chosen solution**: Clerk. I don't want to separately manage a Google dev account, an Apple dev account, a Facebook dev account, ...
