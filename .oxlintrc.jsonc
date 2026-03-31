@@ -3,7 +3,7 @@
 	"plugins": ["eslint", "typescript", "unicorn", "oxc", "react", "jsx-a11y", "import"],
 	"options": {
 		"reportUnusedDisableDirectives": "error",
-		"typeAware": false // TODO: enable this https://oxc.rs/docs/guide/usage/linter/config-file-reference.html#options-typeaware
+		"typeAware": false, // TODO: enable this https://oxc.rs/docs/guide/usage/linter/config-file-reference.html#options-typeaware
 	},
 	"categories": {
 		"correctness": "error",
@@ -12,11 +12,11 @@
 		"style": "error",
 		"restriction": "error",
 		"pedantic": "warn",
-		"nursery": "off"
+		"nursery": "off",
 	},
 	"env": {
 		"browser": true,
-		"es2022": true
+		"es2022": true,
 	},
 	"ignorePatterns": [
 		"**/convex/_generated/**",
@@ -26,7 +26,7 @@
 		"**/*.generated.json",
 		"**/src/1_components/ui/**", // shadcn provided and full of legacy support hacks
 		"**/node_modules/**",
-		"reset.d.ts"
+		"reset.d.ts",
 	],
 	"rules": {
 		// TanStack Form passes children as a prop: https://tanstack.com/form/v1/docs/framework/react/guides/basic-concepts#field
@@ -56,8 +56,8 @@
 			{
 				"ignore": [0, 1, 2, 7, 24, 60],
 				"ignoreDefaultValues": true,
-				"ignoreNumericLiteralTypes": true
-			}
+				"ignoreNumericLiteralTypes": true,
+			},
 		],
 		// Vite's Fast Refresh supports exporting primitive constants alongside components
 		"react/only-export-components": ["error", { "allowConstantExport": true }],
@@ -78,7 +78,7 @@
 		"id-length": ["error", { "exceptions": ["z"] }], // zod
 		"no-warning-comments": "off", // I use todo-tree tools
 		// Broken autocorrect - https://github.com/oxc-project/oxc/issues/20830
-		"sort-keys": "off"
+		"sort-keys": "off",
 	},
 	"overrides": [
 		{
@@ -87,14 +87,14 @@
 			"files": [
 				"vite.config.ts",
 				"vitest.config.ts",
-				"eslint.config.js",
+				"eslint.config.ts",
 				"convex/schema.ts",
-				"convex/auth.config.ts"
+				"convex/auth.config.ts",
 			],
 			"rules": {
 				"import/no-default-export": "off",
-				"import/no-nodejs-modules": "off"
-			}
+				"import/no-nodejs-modules": "off",
+			},
 		},
 		{
 			"files": ["**/*.test.ts", "**/*.test.tsx", "**/test_setup.tsx"],
@@ -106,11 +106,11 @@
 				"react",
 				"jsx-a11y",
 				"import",
-				"vitest"
+				"vitest",
 			],
 			"env": {
-				"jest": true
-			}
+				"jest": true,
+			},
 		},
 		{
 			// TanStack Router convention: `export const Route` appears near the top of the file,
@@ -118,14 +118,14 @@
 			"files": ["**/src/0_routes/**/*.tsx"],
 			"rules": {
 				"import/exports-last": "off",
-				"no-use-before-define": "off"
-			}
+				"no-use-before-define": "off",
+			},
 		},
 		{
 			"files": ["**/convex/**"],
 			"rules": {
-				"id-length": ["error", { "exceptions": ["z", "q"] }] // zod, query
-			}
-		}
-	]
+				"id-length": ["error", { "exceptions": ["z", "q"] }], // zod, query
+			},
+		},
+	],
 }

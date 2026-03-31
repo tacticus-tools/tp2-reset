@@ -1,4 +1,5 @@
 import { useConvexMutation, convexQuery } from "@convex-dev/react-query";
+import { usePostHog } from "@posthog/react";
 import { useForm } from "@tanstack/react-form";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
@@ -6,7 +7,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { userSettingsSchema } from "#common/schemas";
 
 import { api } from "#convex/_generated/api";
-import { usePostHog } from "@posthog/react";
 
 export const Route = createFileRoute("/_authenticated/settings")({
 	component: RouteComponent,
@@ -21,13 +21,13 @@ function maskApiKey(key: string): string {
 
 // oxlint-disable-next-line max-lines-per-function
 function RouteComponent() {
-  const posthog = usePostHog()
+	const posthog = usePostHog();
 	const { data: settings, isPending } = useQuery(convexQuery(api.user_settings.getUserSettings));
 
 	const mutation = useMutation({
 		mutationFn: useConvexMutation(api.user_settings.upsertUserSettings),
-		onSuccess: () => posthog.capture('upsertUserSettings success'),
-		onError: (error) => posthog.capture('upsertUserSettings error', { error: error.message })
+		onSuccess: () => posthog.capture("upsertUserSettings success"),
+		onError: (error) => posthog.capture("upsertUserSettings error", { error: error.message }),
 	});
 
 	const form = useForm({
