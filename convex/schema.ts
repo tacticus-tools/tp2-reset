@@ -1,9 +1,8 @@
+import { LegacyDataSchema, UserSettingsSchema } from "#common/schemas.js";
+import { zodOutputToConvex } from "convex-helpers/server/zod4";
 import { defineSchema, defineTable } from "convex/server";
-import { v } from "convex/values";
 
 export default defineSchema({
-	userSettings: defineTable({
-		tokenIdentifier: v.string(),
-		apiKey: v.string(),
-	}).index("by_tokenIdentifier", ["tokenIdentifier"]),
+	legacyData: defineTable(zodOutputToConvex(LegacyDataSchema)).index("by_clerkUserId", ["clerkUserId"]),
+	userSettings: defineTable(zodOutputToConvex(UserSettingsSchema)).index("by_clerkUserId", ["clerkUserId"]),
 });

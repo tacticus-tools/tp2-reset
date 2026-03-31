@@ -1,31 +1,31 @@
-import { v } from "convex/values";
+import { UserSettingsSchema } from "#common/schemas";
 
-import { userSettingsSchema } from "#common/schemas";
+import { zMutation, zQuery } from "./_utils";
 
-import { mutation, query } from "./_generated/server";
-
-const getUserSettings = query({
+const getUserSettings = zQuery({
 	args: {},
+	returns: UserSettingsSchema,
 	handler: async (ctx) => {
 		const identity = await ctx.auth.getUserIdentity();
 		if (!identity) throw new Error("Not authenticated");
-		const { tokenIdentifier } = identity;
+		const { subject } = identity;
 
-		return await ctx.db
+		const dbData = await ctx.db
 			.query("userSettings")
-			.withIndex("by_tokenIdentifier", (q) => q.eq("tokenIdentifier", tokenIdentifier))
+			.withIndex("by_clerkUserId", (q) => q.eq("clerkUserId", subject))
 			.unique();
+		return UserSettingsSchema.parse(dbData)
 	},
 });
 
-const upsertUserSettings = mutation({
-	args: { apiKey: v.string() },
+const upsertUserSettings = zMutation({
+	args: UserSettingsSchema,
 	handler: async (ctx, args) => {
 		const identity = await ctx.auth.getUserIdentity();
 		if (!identity) throw new Error("Not authenticated");
-		const { tokenIdentifier } = identity;
+		const { subject } = identity;
 		// Validate against Zod schema
-		const parsed = userSettingsSchema.safeParse({ apiKey: args.apiKey });
+		const parsed = UserSettingsSchema.safeParse({ apiKey: args.apiKey });
 		if (!parsed.success) {
 			const { issues } = parsed.error;
 			throw new Error(issues[0]?.message ?? "Invalid input");
@@ -33,12 +33,12 @@ const upsertUserSettings = mutation({
 
 		const existing = await ctx.db
 			.query("userSettings")
-			.withIndex("by_tokenIdentifier", (q) => q.eq("tokenIdentifier", tokenIdentifier))
-			.unique();
+			.withIndex("by_clerkUserId", (q) => q.eq("clerkUserId", subject))
+			.unique()
 
 		// oxlint-disable-next-line unicorn/prefer-ternary
 		if (existing) await ctx.db.patch(existing._id, { apiKey: parsed.data.apiKey });
-		else await ctx.db.insert("userSettings", { tokenIdentifier, apiKey: parsed.data.apiKey });
+		else await ctx.db.insert("userSettings", { clerkUserId: subject, apiKey: parsed.data.apiKey });
 	},
 });
 
