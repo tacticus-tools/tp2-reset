@@ -2,7 +2,7 @@ import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 export const env = createEnv({
 	server: {
-		CONVEX_SITE_URL: z.url(),
+		CLERK_FRONTEND_API_URL: z.url(),
 	},
 	/**
 	 * What object holds the environment variables at runtime. This is usually

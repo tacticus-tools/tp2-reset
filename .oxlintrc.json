@@ -67,6 +67,8 @@
 		"import/prefer-default-export": "off",
 		// Convex does not support kebab-case file names
 		"unicorn/filename-case": ["error", { "case": "snakeCase" }],
+		// breaks code when commenting it out
+		"capitalized-comments": "off",
 		// Personal preferences
 		"no-ternary": "off",
 		"react/jsx-max-depth": ["error", { "max": 7 }], // a bit high but I don't want to push people into indirection

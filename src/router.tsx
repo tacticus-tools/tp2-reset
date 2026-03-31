@@ -1,23 +1,17 @@
-import { routeTree } from "#src/routeTree.gen.ts";
-import { Link, createRouter } from "@tanstack/react-router";
+import { Link, createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query";
-
-import { getContext } from "#src/2_integrations/convex_and_query_context.ts";
-import { QueryProvider } from "#src/2_integrations/convex_and_query.tsx";
 
 import { Button } from "#src/1_components/ui/button";
 
-export const getRouter = () => {
-	const rqContext = getContext();
+import { getContext } from "./2_integrations/app_query_context";
+import { routeTree } from "./routeTree.gen";
 
-	const router = createRouter({
+export const getRouter = () => {
+	const context = getContext();
+	const router = createTanStackRouter({
 		routeTree,
-		Wrap: ({ children }) => <QueryProvider>{children}</QueryProvider>, // Wrapped at the router level to allow for preloading data on intent
-		context: { ...rqContext, title: "Home" },
 		defaultPreload: "intent",
-		scrollRestoration: true,
-		defaultStructuralSharing: true,
-		defaultPreloadStaleTime: 0,
+		// DefaultErrorComponent: DefaultCatchBoundary,
 		defaultNotFoundComponent: () => (
 			<div>
 				<p>Not found!</p>
@@ -26,12 +20,10 @@ export const getRouter = () => {
 				</Button>
 			</div>
 		),
+		context,
+		scrollRestoration: true,
 	});
-
-	setupRouterSsrQueryIntegration({
-		queryClient: rqContext.queryClient,
-		router,
-	});
+	setupRouterSsrQueryIntegration({ router, queryClient: context.queryClient });
 
 	return router;
 };

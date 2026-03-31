@@ -9,29 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './0_routes/__root'
-import { Route as SettingsRouteImport } from './0_routes/settings'
-import { Route as LoginRouteImport } from './0_routes/login'
 import { Route as PlanRouteRouteImport } from './0_routes/plan/route'
+import { Route as AuthenticatedRouteRouteImport } from './0_routes/_authenticated/route'
 import { Route as IndexRouteImport } from './0_routes/index'
 import { Route as PlanIndexRouteImport } from './0_routes/plan/index'
+import { Route as AuthenticatedSettingsRouteImport } from './0_routes/_authenticated/settings'
 import { Route as PlanLreRouteRouteImport } from './0_routes/plan/lre/route'
 import { Route as PlanLreIndexRouteImport } from './0_routes/plan/lre/index'
 import { Route as PlanLreTrajannRouteImport } from './0_routes/plan/lre/trajann'
 import { Route as PlanLreLuciusRouteImport } from './0_routes/plan/lre/lucius'
 
-const SettingsRoute = SettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PlanRouteRoute = PlanRouteRouteImport.update({
   id: '/plan',
   path: '/plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -43,6 +37,11 @@ const PlanIndexRoute = PlanIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => PlanRouteRoute,
+} as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const PlanLreRouteRoute = PlanLreRouteRouteImport.update({
   id: '/lre',
@@ -68,9 +67,8 @@ const PlanLreLuciusRoute = PlanLreLuciusRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/plan': typeof PlanRouteRouteWithChildren
-  '/login': typeof LoginRoute
-  '/settings': typeof SettingsRoute
   '/plan/lre': typeof PlanLreRouteRouteWithChildren
+  '/settings': typeof AuthenticatedSettingsRoute
   '/plan/': typeof PlanIndexRoute
   '/plan/lre/lucius': typeof PlanLreLuciusRoute
   '/plan/lre/trajann': typeof PlanLreTrajannRoute
@@ -78,8 +76,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/login': typeof LoginRoute
-  '/settings': typeof SettingsRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/plan': typeof PlanIndexRoute
   '/plan/lre/lucius': typeof PlanLreLuciusRoute
   '/plan/lre/trajann': typeof PlanLreTrajannRoute
@@ -88,10 +85,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/plan': typeof PlanRouteRouteWithChildren
-  '/login': typeof LoginRoute
-  '/settings': typeof SettingsRoute
   '/plan/lre': typeof PlanLreRouteRouteWithChildren
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/plan/': typeof PlanIndexRoute
   '/plan/lre/lucius': typeof PlanLreLuciusRoute
   '/plan/lre/trajann': typeof PlanLreTrajannRoute
@@ -102,9 +99,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/plan'
-    | '/login'
-    | '/settings'
     | '/plan/lre'
+    | '/settings'
     | '/plan/'
     | '/plan/lre/lucius'
     | '/plan/lre/trajann'
@@ -112,7 +108,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/login'
     | '/settings'
     | '/plan'
     | '/plan/lre/lucius'
@@ -121,10 +116,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/plan'
-    | '/login'
-    | '/settings'
     | '/plan/lre'
+    | '/_authenticated/settings'
     | '/plan/'
     | '/plan/lre/lucius'
     | '/plan/lre/trajann'
@@ -133,32 +128,24 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   PlanRouteRoute: typeof PlanRouteRouteWithChildren
-  LoginRoute: typeof LoginRoute
-  SettingsRoute: typeof SettingsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/settings': {
-      id: '/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof SettingsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/plan': {
       id: '/plan'
       path: '/plan'
       fullPath: '/plan'
       preLoaderRoute: typeof PlanRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -174,6 +161,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/plan/'
       preLoaderRoute: typeof PlanIndexRouteImport
       parentRoute: typeof PlanRouteRoute
+    }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/plan/lre': {
       id: '/plan/lre'
@@ -205,6 +199,17 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface PlanLreRouteRouteChildren {
   PlanLreLuciusRoute: typeof PlanLreLuciusRoute
@@ -238,9 +243,8 @@ const PlanRouteRouteWithChildren = PlanRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   PlanRouteRoute: PlanRouteRouteWithChildren,
-  LoginRoute: LoginRoute,
-  SettingsRoute: SettingsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

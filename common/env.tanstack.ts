@@ -8,6 +8,8 @@ export const env = createEnv({
 	clientPrefix: "VITE_",
 	client: {
 		VITE_CONVEX_URL: z.url(),
+		VITE_CLERK_PUBLISHABLE_KEY: z.string(),
+		VITE_POSTHOG_KEY: z.string().optional(),
 	},
 	/**
 	 * What object holds the environment variables at runtime. This is usually
