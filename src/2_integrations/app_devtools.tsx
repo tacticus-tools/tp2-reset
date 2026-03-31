@@ -6,15 +6,10 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 export function AppDevtools() {
 	return (
 		<TanStackDevtools
-			config={{
-				position: "bottom-right",
-			}}
+			config={{ position: "bottom-right" }}
 			plugins={[
 				{ name: "Router", render: <TanStackRouterDevtoolsPanel /> },
-				{
-					name: "Query",
-					render: <ReactQueryDevtoolsPanel />,
-				},
+				{ name: "Query", render: <ReactQueryDevtoolsPanel /> },
 				formDevtoolsPlugin(),
 			]}
 		/>
