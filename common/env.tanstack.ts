@@ -9,7 +9,8 @@ export const env = createEnv({
 	client: {
 		VITE_CONVEX_URL: z.url(),
 		VITE_CLERK_PUBLISHABLE_KEY: z.string(),
-		VITE_POSTHOG_KEY: z.string().optional(),
+		VITE_PUBLIC_POSTHOG_PROJECT_TOKEN: z.string(),
+		VITE_PUBLIC_POSTHOG_HOST: z.url()
 	},
 	/**
 	 * What object holds the environment variables at runtime. This is usually
