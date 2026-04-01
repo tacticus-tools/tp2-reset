@@ -8,6 +8,8 @@
  * @module
  */
 
+import type * as _utils from "../_utils.js";
+import type * as legacy_data from "../legacy_data.js";
 import type * as user_settings from "../user_settings.js";
 
 import type {
@@ -17,6 +19,8 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  _utils: typeof _utils;
+  legacy_data: typeof legacy_data;
   user_settings: typeof user_settings;
 }>;
 
