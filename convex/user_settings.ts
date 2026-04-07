@@ -14,7 +14,7 @@ const getUserSettings = zQuery({
 			.query("userSettings")
 			.withIndex("by_clerkUserId", (q) => q.eq("clerkUserId", subject))
 			.unique();
-		return UserSettingsSchema.parse(dbData)
+		return UserSettingsSchema.parse(dbData);
 	},
 });
 
@@ -34,7 +34,7 @@ const upsertUserSettings = zMutation({
 		const existing = await ctx.db
 			.query("userSettings")
 			.withIndex("by_clerkUserId", (q) => q.eq("clerkUserId", subject))
-			.unique()
+			.unique();
 
 		// oxlint-disable-next-line unicorn/prefer-ternary
 		if (existing) await ctx.db.patch(existing._id, { apiKey: parsed.data.apiKey });
