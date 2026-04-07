@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const UserSettingsSchema = z.object({
 	clerkUserId: z.string(),
-	apiKey: z.uuid(),
+	apiKey: z.uuid().optional(),
 });
 
 const LegacyDataSchema = z.object({
@@ -12,8 +12,8 @@ const LegacyDataSchema = z.object({
 	tacticusApiKey: z.uuid().optional(),
 	tacticusGuildApiKey: z.uuid().optional(),
 	tacticusUserId: z.string().optional(),
-	role: z.enum(['user', 'moderator', 'admin']).default('user'),
-	username: z.string().min(1).optional(),
-})
+	role: z.enum(["user", "moderator", "admin"]).default("user"),
+	shareToken: z.string().optional(),
+});
 
-export { UserSettingsSchema, LegacyDataSchema }
+export { UserSettingsSchema, LegacyDataSchema };

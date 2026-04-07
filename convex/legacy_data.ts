@@ -14,7 +14,7 @@ const getLegacyData = zQuery({
 			.query("legacyData")
 			.withIndex("by_clerkUserId", (q) => q.eq("clerkUserId", subject))
 			.unique();
-		return LegacyDataSchema.omit({ clerkUserId: true}).parse(dbData)
+		return LegacyDataSchema.omit({ clerkUserId: true }).parse(dbData);
 	},
 });
 
