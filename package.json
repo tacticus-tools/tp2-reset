@@ -63,7 +63,7 @@
 		"zustand": "^5.0.12"
 	},
 	"devDependencies": {
-		"@convex-dev/eslint-plugin": "^1.1.1",
+		"@convex-dev/eslint-plugin": "^2.0.0",
 		"@rolldown/plugin-babel": "^0.2.2",
 		"@tanstack/devtools-vite": "^0.6.0",
 		"@tanstack/eslint-plugin-query": "^5.91.4",
