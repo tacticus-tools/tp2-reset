@@ -82,7 +82,7 @@
 		"eslint-plugin-jest-dom": "^5.5.0",
 		"eslint-plugin-oxlint": "^1.57.0",
 		"eslint-plugin-testing-library": "^7.16.0",
-		"jsdom": "^29.0.0",
+		"jsdom": "^30.0.0",
 		"knip": "^6.0.0",
 		"oxfmt": "^0.44.0",
 		"oxlint": "^1.57.0",
